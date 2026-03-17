@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Foro IA — Uruguay talks about Artificial Intelligence</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0a0e1a; color: #e0e0e0; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(10,14,26,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #1a2040; padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-weight: 800; font-size: 1.3rem; color: #fff; }
+  .logo span { color: #2196F3; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: #aaa; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a.new-tag { position: relative; }
+  .nav-links a.new-tag::after { content: "NEW"; position: absolute; top: -8px; right: -24px; background: #2196F3; color: #fff; font-size: 0.5rem; padding: 1px 4px; border-radius: 3px; font-weight: 700; }
+  .lang-btn { background: #1a2040; border: 1px solid #2a3060; color: #aaa; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: background 0.2s; }
+  .lang-btn:hover { background: #2a3060; color: #fff; }
+
+  /* HERO */
+  .hero { text-align: center; padding: 80px 20px 60px; background: linear-gradient(180deg, #0d1225 0%, #0a0e1a 100%); }
+  .hero-badge { display: inline-block; border: 1px solid #2196F3; color: #2196F3; padding: 6px 20px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 24px; }
+  .hero h1 { font-size: 3rem; font-weight: 800; color: #fff; line-height: 1.1; }
+  .hero h1 span { color: #2196F3; }
+  .hero p { color: #888; margin-top: 16px; font-size: 1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .hero-meta { display: flex; justify-content: center; gap: 40px; margin-top: 30px; color: #777; font-size: 0.9rem; }
+
+  /* SECTIONS */
+  section { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+  .section-label { color: #2196F3; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  section h2 { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  section .subtitle { color: #888; margin-bottom: 30px; }
+  .section-divider { height: 1px; background: #1e2740; max-width: 1000px; margin: 0 auto; }
+
+  /* TIMELINE VERTICAL */
+  .timeline { position: relative; padding-left: 36px; margin-top: 20px; }
+  .timeline::before { content: ''; position: absolute; left: 13px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #2196F3, #1565C0, #10b981); }
+  .tl-item { position: relative; margin-bottom: 36px; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-item::before { content: ''; position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background: #2196F3; border-radius: 50%; border: 3px solid #0a0e1a; box-shadow: 0 0 0 2px #2196F3; }
+  .tl-time { color: #2196F3; font-size: 0.8rem; font-weight: 600; }
+  .tl-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 2px 0; }
+  .tl-desc { color: #999; font-size: 0.88rem; line-height: 1.5; }
+
+  /* FORUM AGENDA */
+  .agenda-item { display: flex; gap: 16px; background: #111827; border-radius: 12px; padding: 16px; margin-bottom: 14px; align-items: center; border-left: 3px solid #2196F3; transition: transform 0.2s; cursor: pointer; }
+  .agenda-item:hover { transform: translateX(4px); }
+  .agenda-img { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: linear-gradient(135deg, #1a2040, #0d1225); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .agenda-img img { width: 100%; height: 100%; object-fit: cover; }
+  .agenda-content .ag-time { color: #2196F3; font-size: 0.75rem; font-weight: 600; }
+  .agenda-content .ag-name { font-size: 1rem; font-weight: 700; color: #fff; }
+  .agenda-content .ag-role { color: #888; font-size: 0.82rem; }
+  .agenda-content .ag-desc { color: #aaa; font-size: 0.82rem; margin-top: 4px; }
+  .badge-tag { display: inline-block; background: #1e3a5f; color: #64b5f6; padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; margin-left: 6px; }
+  .microcopy-note { color: #f59e0b; font-size: 0.72rem; font-style: italic; margin-top: 4px; }
+
+  /* CAROUSEL */
+  .carousel-container { position: relative; overflow: hidden; border-radius: 12px; background: #111827; }
+  .carousel-track { display: flex; gap: 12px; padding: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track .photo-item { width: 300px; height: 200px; object-fit: cover; border-radius: 8px; scroll-snap-align: start; flex-shrink: 0; background: linear-gradient(135deg, #1a2040, #0d1225, #1a3050); display: flex; align-items: center; justify-content: center; color: #444; font-size: 0.8rem; }
+  .carousel-nav { display: flex; justify-content: center; gap: 8px; padding: 12px; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; cursor: pointer; transition: background 0.2s; }
+  .carousel-dot.active { background: #2196F3; }
+  .carousel-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 10px; pointer-events: none; z-index: 2; }
+  .carousel-arrows button { pointer-events: all; background: rgba(0,0,0,0.6); border: none; color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: background 0.2s; }
+  .carousel-arrows button:hover { background: rgba(33,150,243,0.6); }
+
+  /* CARDS GRID */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .card { background: #111827; border-radius: 12px; overflow: hidden; border: 1px solid #1e2740; transition: transform 0.2s; }
+  .card:hover { transform: translateY(-4px); }
+  .card-img { height: 180px; background: linear-gradient(135deg, #1a2040, #0d1225); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .card-img .initials { font-size: 2.5rem; font-weight: 800; color: rgba(33,150,243,0.3); }
+  .card-body { padding: 14px; }
+  .card-body h4 { color: #fff; font-size: 0.95rem; }
+  .card-body .role { color: #888; font-size: 0.78rem; }
+  .card-body .company { color: #2196F3; font-size: 0.78rem; }
+
+  /* LEADERS CHIPS */
+  .leaders-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .leader-chip { display: flex; align-items: center; gap: 10px; background: #111827; border: 1px solid #1e2740; border-radius: 30px; padding: 6px 16px 6px 6px; transition: border-color 0.2s; }
+  .leader-chip:hover { border-color: #2196F3; }
+  .leader-chip .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #1565C0, #0d47a1); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.6); overflow: hidden; }
+  .leader-chip .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .leader-chip .info .name { color: #fff; font-size: 0.85rem; font-weight: 600; }
+  .leader-chip .info .org { color: #888; font-size: 0.72rem; }
+
+  /* FORO */
+  .forum-container { background: #111827; border-radius: 12px; border: 1px solid #1e2740; }
+  .forum-input { padding: 20px; border-bottom: 1px solid #1e2740; }
+  .forum-input textarea { width: 100%; background: #0d1225; border: 1px solid #1e2740; border-radius: 8px; color: #e0e0e0; padding: 12px; font-family: inherit; font-size: 0.9rem; resize: none; height: 80px; transition: border-color 0.2s; }
+  .forum-input textarea:focus { outline: none; border-color: #2196F3; }
+  .forum-input .input-actions { display: flex; justify-content: space-between; margin-top: 10px; align-items: center; }
+  .forum-input .input-hint { color: #666; font-size: 0.75rem; }
+  .forum-btn { background: #2196F3; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; cursor: pointer; font-weight: 600; transition: background 0.2s; }
+  .forum-btn:hover { background: #1976D2; }
+  .forum-post { padding: 16px 20px; border-bottom: 1px solid #0d1225; }
+  .forum-post:last-child { border-bottom: none; }
+  .forum-post .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .forum-post .post-avatar { width: 32px; height: 32px; border-radius: 50%; background: #1a2040; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #aaa; font-weight: 600; }
+  .forum-post .post-name { color: #fff; font-size: 0.85rem; font-weight: 600; }
+  .forum-post .post-company { color: #666; font-size: 0.75rem; }
+  .forum-post .post-time { color: #555; font-size: 0.7rem; margin-left: auto; }
+  .forum-post .post-body { color: #ccc; font-size: 0.88rem; line-height: 1.5; }
+  .forum-post .post-url { display: inline-block; background: #0d1225; border: 1px solid #1e2740; border-radius: 6px; padding: 6px 12px; margin-top: 8px; color: #2196F3; font-size: 0.8rem; text-decoration: none; transition: border-color 0.2s; }
+  .forum-post .post-url:hover { border-color: #2196F3; }
+
+  /* TOOLBOX */
+  .toolbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .tool-card { background: #111827; border: 1px solid #1e2740; border-radius: 12px; padding: 20px; transition: transform 0.2s, border-color 0.2s; }
+  .tool-card:hover { transform: translateY(-4px); border-color: #2196F3; }
+  .tool-card .tool-icon { width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, #1565C0, #0d47a1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 12px; }
+  .tool-card h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; }
+  .tool-card p { color: #888; font-size: 0.82rem; line-height: 1.4; margin-bottom: 10px; }
+  .tool-card .tool-link { color: #2196F3; font-size: 0.78rem; text-decoration: none; }
+  .tool-card .tool-link:hover { text-decoration: underline; }
+  .tool-card .tool-shared { color: #555; font-size: 0.7rem; margin-top: 6px; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid #1e2740; padding: 16px 0; cursor: pointer; }
+  .faq-q { color: #fff; font-size: 0.95rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .faq-q .arrow { color: #2196F3; font-size: 0.7rem; transition: transform 0.3s; }
+  .faq-q .arrow.open { transform: rotate(180deg); }
+  .faq-a { color: #999; font-size: 0.88rem; line-height: 1.5; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+  .faq-a.open { max-height: 200px; padding-top: 10px; }
+
+  /* QUOTE */
+  .quote-block { max-width: 700px; margin: 40px auto; background: #111827; border: 1px solid #1e2740; border-radius: 16px; padding: 40px; text-align: center; }
+  .quote-text { color: #ddd; font-style: italic; font-size: 1rem; line-height: 1.6; }
+  .quote-author { color: #2196F3; margin-top: 16px; font-weight: 600; }
+  .quote-special { background: #1a1a00; border: 1px solid #f59e0b; border-radius: 12px; padding: 16px; margin-top: 20px; display: flex; align-items: center; gap: 12px; text-align: left; }
+  .quote-special .star { font-size: 1.8rem; }
+  .quote-special p { color: #ddd; font-size: 0.88rem; }
+  .quote-special strong { color: #f59e0b; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 30px; border-top: 1px solid #1e2740; color: #666; font-size: 0.8rem; }
+  footer strong span { color: #2196F3; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
+    .nav-links { gap: 14px; font-size: 0.75rem; }
+    .hero h1 { font-size: 2rem; }
+    .hero-meta { flex-direction: column; gap: 8px; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .toolbox-grid { grid-template-columns: 1fr; }
+    .carousel-track .photo-item { width: 250px; height: 170px; }
+    section { padding: 40px 16px; }
+  }
+  @media (max-width: 480px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .agenda-item { flex-direction: column; text-align: center; }
+    .agenda-img { margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Foro<span>IA</span></div>
+  <div class="nav-links">
+    <a href="#format">Format</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#photos">Photos</a>
+    <a href="#companies">Companies</a>
+    <a href="#foro" class="new-tag" style="margin-right: 20px;">Foro</a>
+    <a href="#toolbox" class="new-tag" style="margin-right: 20px;">ToolBox</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <button class="lang-btn" onclick="toggleLang()">ES</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">URUGUAY · TECH & BUSINESS</div>
+  <h1>Uruguay talks about<br><span>Artificial Intelligence</span></h1>
+  <p>Business and tech leaders gather at Fabian Kopel's Mini AI Forum to explore how AI is transforming industries.</p>
+  <div class="hero-meta">
+    <span>📍 Montevideo, Uruguay</span>
+    <span>📅 2026</span>
+    <span>👥 32 participants</span>
+  </div>
+</div>
+
+<!-- HOW THE DAY UNFOLDS — TIMELINE VERTICAL -->
+<section id="format">
+  <div class="section-label">EVENT FORMAT</div>
+  <h2>How the Day Unfolds</h2>
+  <p class="subtitle">An intimate, dynamic, and informal gathering — designed to spark real conversation.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">11:00 – 11:20</div>
+      <div class="tl-title">👥 Welcome & Introductions</div>
+      <div class="tl-desc">Participants introduce themselves with their company and role. Conducted via deck. Coffee from the very start.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:20 – 12:50</div>
+      <div class="tl-title">🔧 Expert Roundtable</div>
+      <div class="tl-desc">10 presentations of 10 minutes each. Each expert shares their vision of AI in their industry. Moderator: Fabián Kopel.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:50 – 14:30</div>
+      <div class="tl-title">🏢 CEO Roundtable</div>
+      <div class="tl-desc">Each executive presents their pain points in 3 minutes. 10-min blocks with direct exchange with experts. Light food served at 12:50, salads & asado at 13:30.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time" style="color: #10b981;">14:30 onwards</div>
+      <div class="tl-title">🤝 Open Networking</div>
+      <div class="tl-desc">The entire afternoon available to talk with experts, exchange ideas, and schedule future meetings. No clock, no protocol.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FORUM AGENDA -->
+<section id="agenda">
+  <div class="section-label">PROGRAM</div>
+  <h2>Forum Agenda</h2>
+  <p class="subtitle">Times confirmed in Uruguay time. Click on each speaker to see their story and video.</p>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.2rem;color:rgba(33,150,243,0.4);">📷</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:00 – 11:20</span>
+      <div class="ag-name">Welcome</div>
+      <div class="ag-desc">Introductions — Company & Role (deck)</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.2rem;color:rgba(33,150,243,0.4);">📷</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:20 – 11:30</span>
+      <div class="ag-name">Opening</div>
+      <div class="ag-desc">Moderator: Fabián Kopel · Overview of scope and objectives (10 min)</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.5rem;color:rgba(33,150,243,0.3);">NJ</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:30 – 11:40</span> <span class="badge-tag">con Gisella Bertelli</span>
+      <div class="ag-name">Nicolas Jodal</div>
+      <div class="ag-role">CEO GeneXus / Globant</div>
+      <div class="ag-desc">Since 1988 reimagining how software is built — now with AI.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.5rem;color:rgba(33,150,243,0.3);">AL</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:40 – 11:50</span> <span class="badge-tag">Invitado especial Bs As</span>
+      <div class="ag-name">Ariel Lipchutz</div>
+      <div class="ag-role">Founder · IA2 Agency</div>
+      <div class="ag-desc">Turning the promise of AI into real results for companies.</div>
+      <div class="microcopy-note">⚠️ Video no disponible por razones técnicas</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.5rem;color:rgba(33,150,243,0.3);">AB</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:50 – 12:00</span>
+      <div class="ag-name">Andres Bzurovski</div>
+      <div class="ag-role">CEO · Vixion / Bankingly</div>
+      <div class="ag-desc">Building the infrastructure of digital banking in LatAm.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.5rem;color:rgba(33,150,243,0.3);">DG</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:00 – 12:10</span>
+      <div class="ag-name">Diego Gamba</div>
+      <div class="ag-role">Director · MercadoLibre</div>
+      <div class="ag-desc">Data and AI at scale in Latin America's largest marketplace.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.5rem;color:rgba(33,150,243,0.3);">EO</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:10 – 12:20</span>
+      <div class="ag-name">Esteban Ordano</div>
+      <div class="ag-role">Founder · Decentraland</div>
+      <div class="ag-desc">Pioneering virtual worlds and the intersection of AI + Web3.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.5rem;color:rgba(33,150,243,0.3);">MB</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:20 – 12:30</span>
+      <div class="ag-name">Matias Boix</div>
+      <div class="ag-role">VP Engineering · Auth0 / Okta</div>
+      <div class="ag-desc">Identity, security, and AI-driven authentication systems.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.5rem;color:rgba(33,150,243,0.3);">GM</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:30 – 12:40</span>
+      <div class="ag-name">Gastón Milano</div>
+      <div class="ag-role">AI Engineer</div>
+      <div class="ag-desc">From code to intelligence — building AI-native applications.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><div class="initials" style="font-size:1.5rem;color:rgba(33,150,243,0.3);">LA</div></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:40 – 12:50</span>
+      <div class="ag-name">Leo Alvarez</div>
+      <div class="ag-role">AI Specialist</div>
+      <div class="ag-desc">Applied AI for business transformation and process optimization.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item" style="border-left-color: #f59e0b;">
+    <div class="agenda-img" style="background: linear-gradient(135deg, #3a2a00, #1a1500);"><div class="initials" style="font-size:1.2rem;color:rgba(245,158,11,0.4);">🏢</div></div>
+    <div class="agenda-content">
+      <span class="ag-time" style="color:#f59e0b;">12:50 – 14:30</span>
+      <div class="ag-name">CEO & Executive Roundtable</div>
+      <div class="ag-desc">Light food · Direct exchange with experts · Groups of 3</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EVENT PHOTOS — CAROUSEL -->
+<section id="photos">
+  <div class="section-label">MOMENTS</div>
+  <h2>Event Photos</h2>
+  <p class="subtitle">Highlights from the Forum.</p>
+
+  <div class="carousel-container">
+    <div class="carousel-arrows">
+      <button onclick="scrollCarousel(-1)">◀</button>
+      <button onclick="scrollCarousel(1)">▶</button>
+    </div>
+    <div class="carousel-track" id="carouselTrack">
+      <div class="photo-item">📷 Photo 1</div>
+      <div class="photo-item">📷 Photo 2</div>
+      <div class="photo-item">📷 Photo 3</div>
+      <div class="photo-item">📷 Photo 4</div>
+      <div class="photo-item">📷 Photo 5</div>
+      <div class="photo-item">📷 Photo 6</div>
+    </div>
+    <div class="carousel-nav" id="carouselNav"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CEOs & EXECUTIVES -->
+<section id="companies">
+  <div class="section-label">COMPANIES</div>
+  <h2>CEOs & Executives</h2>
+  <p class="subtitle">The business leaders joining the conversation.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-img"><span class="initials">OD</span></div>
+      <div class="card-body"><h4>Orlando Dovat</h4><span class="role">Founder</span><br><span class="company">Zonamerica</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><span class="initials">JMP</span></div>
+      <div class="card-body"><h4>Juan Manuel Parada</h4><span class="role">CEO</span><br><span class="company">Tienda Inglesa</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><span class="initials">JC</span></div>
+      <div class="card-body"><h4>Joaquin Cabrera</h4><span class="role">CEO</span><br><span class="company">Ciemsa CSI Ingeniería</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><span class="initials">AT</span></div>
+      <div class="card-body"><h4>Agustin Tafernaberry</h4><span class="role">CEO</span><br><span class="company">Itaú Uruguay</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><span class="initials">DF</span></div>
+      <div class="card-body"><h4>Diego Forlán</h4><span class="role">Founder</span><br><span class="company">DFC Club Deportivo</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><span class="initials">CP</span></div>
+      <div class="card-body"><h4>Carlos Pellas</h4><span class="role">Chairman</span><br><span class="company">Grupo Pellas</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><span class="initials">MR</span></div>
+      <div class="card-body"><h4>Martin Rastellino</h4><span class="role">Managing Director</span><br><span class="company">Accenture</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><span class="initials">AF</span></div>
+      <div class="card-body"><h4>Alberto Fernandez</h4><span class="role">COO</span><br><span class="company">ISAP</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ECOSYSTEM LEADERS -->
+<section>
+  <div class="section-label">COPIED IN</div>
+  <h2>Ecosystem Leaders</h2>
+  <p class="subtitle">Founders and icons of Latin American tech who are part of this conversation.</p>
+
+  <div class="leaders-grid">
+    <div class="leader-chip">
+      <div class="avatar">MW</div>
+      <div class="info"><div class="name">Mati Wolosky</div><div class="org">Tech Entrepreneur</div></div>
+    </div>
+    <div class="leader-chip">
+      <div class="avatar">SF</div>
+      <div class="info"><div class="name">Sergio Fogel</div><div class="org">dLocal</div></div>
+    </div>
+    <div class="leader-chip">
+      <div class="avatar">HK</div>
+      <div class="info"><div class="name">Hernan Kazah</div><div class="org">Kaszek Ventures</div></div>
+    </div>
+    <div class="leader-chip">
+      <div class="avatar">GE</div>
+      <div class="info"><div class="name">Guibert Englebienne</div><div class="org">Globant</div></div>
+    </div>
+    <div class="leader-chip">
+      <div class="avatar">MM</div>
+      <div class="info"><div class="name">Martin Migoya</div><div class="org">Globant</div></div>
+    </div>
+    <div class="leader-chip">
+      <div class="avatar">MD</div>
+      <div class="info"><div class="name">Martin Delosantos</div><div class="org">MercadoLibre</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FORO -->
+<section id="foro">
+  <div class="section-label">COMMUNITY</div>
+  <h2>Foro</h2>
+  <p class="subtitle">Espacio abierto para compartir ideas, opiniones y herramientas.</p>
+
+  <div class="forum-container">
+    <div class="forum-input">
+      <textarea id="forumText" placeholder="Compartí tu opinión, una herramienta de IA, o un recurso útil..."></textarea>
+      <div class="input-actions">
+        <span class="input-hint">💡 Las URLs que compartas se agregan automáticamente al ToolBox</span>
+        <button class="forum-btn" onclick="addPost()">Publicar</button>
+      </div>
+    </div>
+
+    <div id="forumPosts">
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">NJ</div>
+          <div><span class="post-name">Nicolas Jodal</span> <span class="post-company">· GeneXus / Globant</span></div>
+          <span class="post-time">hace 2h</span>
+        </div>
+        <div class="post-body">Increíble lo que se puede hacer hoy con agentes de IA para automatizar procesos de desarrollo. Les comparto esta herramienta que estamos probando:</div>
+        <a href="#" class="post-url">🔗 https://ejemplo-herramienta-ia.com</a>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">DG</div>
+          <div><span class="post-name">Diego Gamba</span> <span class="post-company">· MercadoLibre</span></div>
+          <span class="post-time">hace 5h</span>
+        </div>
+        <div class="post-body">En MercadoLibre estamos usando modelos de lenguaje para mejorar las búsquedas. El impacto en conversión es notable.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">MB</div>
+          <div><span class="post-name">Matias Boix</span> <span class="post-company">· Auth0 / Okta</span></div>
+          <span class="post-time">hace 1d</span>
+        </div>
+        <div class="post-body">Identity + AI es una combinación que va a cambiar todo. Estamos experimentando con detección de fraude basada en patrones de comportamiento.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TOOLBOX -->
+<section id="toolbox">
+  <div class="section-label">RECURSOS</div>
+  <h2>ToolBox</h2>
+  <p class="subtitle">Herramientas de IA compartidas por los participantes del foro. Descripciones generadas automáticamente.</p>
+
+  <div class="toolbox-grid">
+    <div class="tool-card">
+      <div class="tool-icon">🤖</div>
+      <h4>Claude by Anthropic</h4>
+      <p>Asistente de IA avanzado para análisis, escritura y programación. Usado por múltiples participantes del foro.</p>
+      <a href="https://claude.ai" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Nicolas Jodal</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">⚡</div>
+      <h4>n8n Automation</h4>
+      <p>Plataforma de automatización con IA para workflows empresariales. Integra con múltiples servicios y APIs.</p>
+      <a href="https://n8n.io" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Matias Boix</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📊</div>
+      <h4>Cursor IDE</h4>
+      <p>Editor de código con inteligencia artificial integrada. Acelera el desarrollo con sugerencias contextuales.</p>
+      <a href="https://cursor.sh" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Gastón Milano</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🎨</div>
+      <h4>Midjourney</h4>
+      <p>Generación de imágenes con IA. Ideal para crear contenido visual de alta calidad para presentaciones y marketing.</p>
+      <a href="https://midjourney.com" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Leo Alvarez</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🧠</div>
+      <h4>NotebookLM</h4>
+      <p>Herramienta de Google para análisis de documentos con IA. Permite hacer preguntas sobre tus propios datos.</p>
+      <a href="https://notebooklm.google.com" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Diego Gamba</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔐</div>
+      <h4>Auth0 AI</h4>
+      <p>Autenticación inteligente con detección de fraude basada en patrones de comportamiento y machine learning.</p>
+      <a href="https://auth0.com" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Matias Boix</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- QUOTE -->
+<section>
+  <div class="quote-block">
+    <div class="quote-text">"Los esperamos mañana con ganas de aprender y siempre agradecidos a ustedes que estén en Uruguay, que es increíble que reúna este talento."</div>
+    <div class="quote-author">— Fabián Kopel, organizador</div>
+    <div class="quote-special">
+      <div class="star">⭐</div>
+      <p><strong>Diego Forlán</strong> — Mejor jugador del Mundial 2010 · Fundador DFC Club Deportivo. Presente como <strong style="color:#f59e0b;">talento uruguayo por excelencia</strong> y empresario.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">FAQ</div>
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">What is the Mini AI Forum? <span class="arrow">▼</span></div>
+    <div class="faq-a">An intimate gathering of tech experts and business leaders in Montevideo, Uruguay, organized by Fabián Kopel to explore how AI is transforming industries. Limited to ~32 participants for meaningful conversation.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Who can attend? <span class="arrow">▼</span></div>
+    <div class="faq-a">The forum is by invitation only. It brings together CEOs, founders, and AI specialists from Uruguay and the region to foster direct, high-quality exchanges.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">How can I contact Fabián? <span class="arrow">▼</span></div>
+    <div class="faq-a">You can reach Fabián Kopel through LinkedIn or via the contact form on the Kopel Sánchez website. He is always open to connecting with people passionate about AI and technology.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">What is the ToolBox? <span class="arrow">▼</span></div>
+    <div class="faq-a">A curated collection of AI tools and resources shared by forum participants. When someone shares a URL in the Foro section, it is automatically added to the ToolBox with an AI-generated description.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Mini Foro <span>IA</span></strong><br>
+  Organized by Fabián Kopel · Montevideo, Uruguay<br>
+  <span style="font-size:0.7rem;">Imágenes: DALL-E 3 · Videos: Sora 2</span>
+</footer>
+
+<script>
+// CAROUSEL
+function scrollCarousel(dir) {
+  const track = document.getElementById('carouselTrack');
+  const scrollAmt = 312; // 300px + 12px gap
+  track.scrollBy({ left: dir * scrollAmt, behavior: 'smooth' });
+}
+
+// Generate carousel dots
+(function initCarousel() {
+  const track = document.getElementById('carouselTrack');
+  const nav = document.getElementById('carouselNav');
+  const items = track.querySelectorAll('.photo-item');
+  items.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => {
+      track.scrollTo({ left: i * 312, behavior: 'smooth' });
+    };
+    nav.appendChild(dot);
+  });
+  track.addEventListener('scroll', () => {
+    const idx = Math.round(track.scrollLeft / 312);
+    nav.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+  });
+})();
+
+// FAQ TOGGLE
+function toggleFaq(el) {
+  const answer = el.querySelector('.faq-a');
+  const arrow = el.querySelector('.arrow');
+  answer.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// FORUM POST
+function addPost() {
+  const textarea = document.getElementById('forumText');
+  const text = textarea.value.trim();
+  if (!text) return;
+
+  const posts = document.getElementById('forumPosts');
+  const post = document.createElement('div');
+  post.className = 'forum-post';
+
+  // Detect URLs
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const bodyHtml = text.replace(urlRegex, '<a href="$1" class="post-url" target="_blank">🔗 $1</a>');
+
+  post.innerHTML = `
+    <div class="post-header">
+      <div class="post-avatar">TU</div>
+      <div><span class="post-name">Participante</span> <span class="post-company">· Forum</span></div>
+      <span class="post-time">ahora</span>
+    </div>
+    <div class="post-body">${bodyHtml}</div>
+  `;
+  posts.insertBefore(post, posts.firstChild);
+  textarea.value = '';
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Language toggle (demo)
+let lang = 'es';
+function toggleLang() {
+  lang = lang === 'es' ? 'en' : 'es';
+  document.querySelector('.lang-btn').textContent = lang.toUpperCase();
+}
+</script>
+
+</body>
+</html>
