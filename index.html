@@ -26,633 +26,891 @@
   .hero h1 { font-size: 3rem; font-weight: 800; color: #fff; line-height: 1.1; }
   .hero h1 span { color: #2196F3; }
   .hero p { color: #888; margin-top: 16px; font-size: 1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .hero-meta { display: flex; justify-content: center; gap: 40px; margin-top: 30px; color: #777; font-size: 0.9rem; }
 
   /* SECTIONS */
-  section { padding: 80px 40px; max-width: 1400px; margin: 0 auto; }
-  h2 { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-  .section-subtitle { color: #888; font-size: 1rem; margin-bottom: 48px; }
+  section { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+  .section-label { color: #2196F3; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  section h2 { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  section .subtitle { color: #888; margin-bottom: 30px; }
+  .section-divider { height: 1px; background: #1e2740; max-width: 1000px; margin: 0 auto; }
 
-  /* GRID */
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-  .grid.large { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+  /* TIMELINE VERTICAL */
+  .timeline { position: relative; padding-left: 36px; margin-top: 20px; }
+  .timeline::before { content: ''; position: absolute; left: 13px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #2196F3, #1565C0, #10b981); }
+  .tl-item { position: relative; margin-bottom: 36px; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-item::before { content: ''; position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background: #2196F3; border-radius: 50%; border: 3px solid #0a0e1a; box-shadow: 0 0 0 2px #2196F3; }
+  .tl-time { color: #2196F3; font-size: 0.8rem; font-weight: 600; }
+  .tl-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 2px 0; }
+  .tl-desc { color: #999; font-size: 0.88rem; line-height: 1.5; }
 
-  /* CARDS */
-  .card { background: linear-gradient(135deg, #0d1225 0%, #1a1a2e 100%); border: 1px solid #1e2740; border-radius: 12px; padding: 24px; transition: all 0.3s ease; position: relative; overflow: hidden; }
-  .card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(33,150,243,0.1) 0%, transparent 70%); opacity: 0; transition: opacity 0.3s; }
-  .card:hover { border-color: #2196F3; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(33,150,243,0.15); }
-  .card:hover::before { opacity: 1; }
-  .card h4 { font-size: 1.2rem; color: #fff; margin-bottom: 4px; font-weight: 700; }
-  .card .role { font-size: 0.85rem; color: #2196F3; font-weight: 600; margin-bottom: 12px; }
-  .card p { color: #aaa; font-size: 0.9rem; line-height: 1.5; }
+  /* FORUM AGENDA */
+  .agenda-item { display: flex; gap: 16px; background: #111827; border-radius: 12px; padding: 16px; margin-bottom: 14px; align-items: center; border-left: 3px solid #2196F3; transition: transform 0.2s; cursor: pointer; }
+  .agenda-item:hover { transform: translateX(4px); }
+  .agenda-img { width: 120px; height: 120px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: linear-gradient(135deg, #1a2040, #0d1225); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .agenda-img img { width: 100%; height: 100%; object-fit: cover; }
+  .agenda-content .ag-time { color: #2196F3; font-size: 0.75rem; font-weight: 600; }
+  .agenda-content .ag-name { font-size: 1rem; font-weight: 700; color: #fff; }
+  .agenda-content .ag-role { color: #888; font-size: 0.82rem; }
+  .agenda-content .ag-desc { color: #aaa; font-size: 0.82rem; margin-top: 4px; }
+  .badge-tag { display: inline-block; background: #1e3a5f; color: #64b5f6; padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; margin-left: 6px; }
+  .microcopy-note { color: #f59e0b; font-size: 0.72rem; font-style: italic; margin-top: 4px; }
 
-  /* EXPERT SECTION */
-  #experts .card { background: linear-gradient(135deg, #1a0d2e 0%, #2d1b4e 100%); border: 1px solid #3d2b5f; }
-  #experts .card:hover { border-color: #9c27b0; box-shadow: 0 8px 24px rgba(156,39,176,0.15); }
-  #experts .card .role { color: #ba68c8; }
-  #experts h4 { color: #e0b0ff; }
+  /* CAROUSEL */
+  .carousel-container { position: relative; overflow: hidden; border-radius: 12px; background: #111827; }
+  .carousel-track { display: flex; gap: 12px; padding: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track .photo-item { width: 300px; height: 200px; object-fit: cover; border-radius: 8px; scroll-snap-align: start; flex-shrink: 0; background: linear-gradient(135deg, #1a2040, #0d1225, #1a3050); display: flex; align-items: center; justify-content: center; color: #444; font-size: 0.8rem; }
+  .carousel-track .photo-item img { width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+  .carousel-nav { display: flex; justify-content: center; gap: 8px; padding: 12px; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; cursor: pointer; transition: background 0.2s; }
+  .carousel-dot.active { background: #2196F3; }
+  .carousel-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 10px; pointer-events: none; z-index: 2; }
+  .carousel-arrows button { pointer-events: all; background: rgba(0,0,0,0.6); border: none; color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: background 0.2s; }
+  .carousel-arrows button:hover { background: rgba(33,150,243,0.6); }
 
-  /* COMPANIES */
-  #companies { padding: 80px 40px; background: #0d1225; }
-  #companies h2 { text-align: center; }
-  .companies-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; max-width: 1400px; margin: 0 auto; }
+  /* CARDS GRID */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .card { background: #111827; border-radius: 12px; overflow: hidden; border: 1px solid #1e2740; transition: transform 0.2s; }
+  .card:hover { transform: translateY(-4px); }
+  .card-img { height: 180px; background: linear-gradient(135deg, #1a2040, #0d1225); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .card-img .initials { font-size: 2.5rem; font-weight: 800; color: rgba(33,150,243,0.3); }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; }
+  .card-body { padding: 14px; }
+  .card-body h4 { color: #fff; font-size: 0.95rem; }
+  .card-body .role { color: #888; font-size: 0.78rem; }
+  .card-body .company { color: #2196F3; font-size: 0.78rem; }
 
-  /* ECOSYSTEM LEADERS */
-  #leaders { padding: 80px 40px; background: linear-gradient(180deg, #0a0e1a 0%, #0d1225 100%); }
-  #leaders h2 { text-align: center; }
-  .leaders-container { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 1000px; margin: 0 auto; }
-  .leader-chip { background: #1a2040; border: 1px solid #2a3060; padding: 12px 16px; border-radius: 20px; color: #aaa; font-size: 0.9rem; cursor: default; transition: all 0.2s; }
-  .leader-chip:hover { background: #2a3060; color: #fff; border-color: #2196F3; }
-  .leader-chip .name { font-weight: 600; }
+  /* LEADERS CHIPS */
+  .leaders-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .leader-chip { display: flex; align-items: center; gap: 10px; background: #111827; border: 1px solid #1e2740; border-radius: 30px; padding: 6px 16px 6px 6px; transition: border-color 0.2s; }
+  .leader-chip:hover { border-color: #2196F3; }
+  .leader-chip .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #1565C0, #0d47a1); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.6); overflow: hidden; }
+  .leader-chip .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .leader-chip .info .name { color: #fff; font-size: 0.85rem; font-weight: 600; }
+  .leader-chip .info .org { color: #888; font-size: 0.72rem; }
 
-  /* MODAL */
-  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; }
-  .modal-overlay.active { display: flex; align-items: center; justify-content: center; }
-  .modal-content { background: linear-gradient(135deg, #0d1225 0%, #1a1a2e 100%); border: 1px solid #2a3060; border-radius: 16px; max-width: 700px; width: 90%; max-height: 90vh; overflow-y: auto; padding: 32px; position: relative; }
-  .modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #aaa; font-size: 1.5rem; cursor: pointer; transition: color 0.2s; }
-  .modal-close:hover { color: #fff; }
-  .modal-video { width: 100%; border-radius: 8px; margin-bottom: 20px; display: block; }
-  .modal-title { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .modal-role { color: #2196F3; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
-  .modal-tagline { color: #f59e0b; font-style: italic; font-size: 0.9rem; margin-bottom: 12px; }
-  .modal-section-label { color: #2196F3; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
-  .modal-bio { color: #ccc; font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; }
-  .modal-company { color: #aaa; font-size: 0.85rem; background: #0d1225; border: 1px solid #1e2740; border-radius: 8px; padding: 10px; }
+  /* FORO */
+  .forum-container { background: #111827; border-radius: 12px; border: 1px solid #1e2740; }
+  .forum-input { padding: 20px; border-bottom: 1px solid #1e2740; }
+  .forum-input textarea { width: 100%; background: #0d1225; border: 1px solid #1e2740; border-radius: 8px; color: #e0e0e0; padding: 12px; font-family: inherit; font-size: 0.9rem; resize: none; height: 80px; transition: border-color 0.2s; }
+  .forum-input textarea:focus { outline: none; border-color: #2196F3; }
+  .forum-input .input-actions { display: flex; justify-content: space-between; margin-top: 10px; align-items: center; }
+  .forum-input .input-hint { color: #666; font-size: 0.75rem; }
+  .forum-btn { background: #2196F3; color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; cursor: pointer; font-weight: 600; transition: background 0.2s; }
+  .forum-btn:hover { background: #1976D2; }
+  .forum-post { padding: 16px 20px; border-bottom: 1px solid #0d1225; }
+  .forum-post:last-child { border-bottom: none; }
+  .forum-post .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .forum-post .post-avatar { width: 32px; height: 32px; border-radius: 50%; background: #1a2040; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #aaa; font-weight: 600; }
+  .forum-post .post-name { color: #fff; font-size: 0.85rem; font-weight: 600; }
+  .forum-post .post-company { color: #666; font-size: 0.75rem; }
+  .forum-post .post-time { color: #555; font-size: 0.7rem; margin-left: auto; }
+  .forum-post .post-body { color: #ccc; font-size: 0.88rem; line-height: 1.5; }
+  .forum-post .post-url { display: inline-block; background: #0d1225; border: 1px solid #1e2740; border-radius: 6px; padding: 6px 12px; margin-top: 8px; color: #2196F3; font-size: 0.8rem; text-decoration: none; transition: border-color 0.2s; }
+  .forum-post .post-url:hover { border-color: #2196F3; }
 
-  /* FORUM */
-  #forum { padding: 80px 40px; background: #0a0e1a; }
-  #forum h2 { text-align: center; margin-bottom: 48px; }
-  .forum-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
-  .forum-threads { display: flex; flex-direction: column; gap: 12px; }
-  .forum-thread { background: linear-gradient(135deg, #0d1225 0%, #1a1a2e 100%); border-left: 3px solid #2196F3; padding: 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-  .forum-thread:hover { border-left-color: #9c27b0; transform: translateX(4px); }
-  .forum-thread-title { color: #fff; font-weight: 600; margin-bottom: 4px; }
-  .forum-thread-meta { color: #666; font-size: 0.85rem; }
-  .forum-sidebar { display: flex; flex-direction: column; gap: 12px; }
-  .toolbox { background: linear-gradient(135deg, #1a0d2e 0%, #2d1b4e 100%); border: 1px solid #3d2b5f; padding: 16px; border-radius: 8px; }
-  .toolbox h4 { color: #ba68c8; font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
-  .toolbox ul { list-style: none; }
-  .toolbox li { color: #aaa; font-size: 0.85rem; margin-bottom: 6px; }
+  /* TOOLBOX */
+  .toolbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .tool-card { background: #111827; border: 1px solid #1e2740; border-radius: 12px; padding: 20px; transition: transform 0.2s, border-color 0.2s; }
+  .tool-card:hover { transform: translateY(-4px); border-color: #2196F3; }
+  .tool-card .tool-icon { width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, #1565C0, #0d47a1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 12px; }
+  .tool-card h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; }
+  .tool-card p { color: #888; font-size: 0.82rem; line-height: 1.4; margin-bottom: 10px; }
+  .tool-card .tool-link { color: #2196F3; font-size: 0.78rem; text-decoration: none; }
+  .tool-card .tool-link:hover { text-decoration: underline; }
+  .tool-card .tool-shared { color: #555; font-size: 0.7rem; margin-top: 6px; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid #1e2740; padding: 16px 0; cursor: pointer; }
+  .faq-q { color: #fff; font-size: 0.95rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .faq-q .arrow { color: #2196F3; font-size: 0.7rem; transition: transform 0.3s; }
+  .faq-q .arrow.open { transform: rotate(180deg); }
+  .faq-a { color: #999; font-size: 0.88rem; line-height: 1.5; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+  .faq-a.open { max-height: 200px; padding-top: 10px; }
+
+  /* QUOTE */
+  .quote-block { max-width: 700px; margin: 40px auto; background: #111827; border: 1px solid #1e2740; border-radius: 16px; padding: 40px; text-align: center; }
+  .quote-text { color: #ddd; font-style: italic; font-size: 1rem; line-height: 1.6; }
+  .quote-author { color: #2196F3; margin-top: 16px; font-weight: 600; }
+  .quote-special { background: #1a1a00; border: 1px solid #f59e0b; border-radius: 12px; padding: 16px; margin-top: 20px; display: flex; align-items: center; gap: 12px; text-align: left; }
+  .quote-special .star { font-size: 1.8rem; }
+  .quote-special p { color: #ddd; font-size: 0.88rem; }
+  .quote-special strong { color: #f59e0b; }
+
+  /* VIDEO MODAL */
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
+  .modal-overlay.active { display: flex; }
+  .modal-content { background: #111827; border-radius: 12px; padding: 24px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; border: 1px solid #1e2740; position: relative; }
+  .modal-close { position: absolute; top: 16px; right: 16px; background: #1e2740; border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .modal-close:hover { background: #2196F3; }
+  .modal-video { width: 100%; height: 400px; border-radius: 8px; margin-bottom: 16px; }
+  .modal-title { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+  .modal-role { color: #2196F3; font-size: 0.9rem; margin-bottom: 12px; }
+  .modal-bio { color: #ccc; font-size: 0.88rem; line-height: 1.5; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 30px; border-top: 1px solid #1e2740; color: #666; font-size: 0.8rem; }
+  footer strong span { color: #2196F3; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    nav { padding: 12px 20px; }
-    .hero { padding: 40px 20px; }
+    nav { padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
+    .nav-links { gap: 14px; font-size: 0.75rem; }
     .hero h1 { font-size: 2rem; }
-    section { padding: 40px 20px; }
-    h2 { font-size: 2rem; }
-    .grid, .grid.large { grid-template-columns: 1fr; }
-    .forum-container { grid-template-columns: 1fr; }
+    .hero-meta { flex-direction: column; gap: 8px; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .toolbox-grid { grid-template-columns: 1fr; }
+    .carousel-track .photo-item { width: 250px; height: 170px; }
+    section { padding: 40px 16px; }
+  }
+  @media (max-width: 480px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .agenda-item { flex-direction: column; text-align: center; }
+    .agenda-img { margin: 0 auto; }
   }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="logo">Mini<span>Foro</span></div>
+  <div class="logo">Foro<span>IA</span></div>
   <div class="nav-links">
-    <a href="#experts">Agenda</a>
-    <a href="#companies">CEOs</a>
-    <a href="#leaders">Ecosystem</a>
-    <a href="#forum" class="new-tag">Forum</a>
+    <a href="#format" data-en="Format" data-es="Formato">Formato</a>
+    <a href="#agenda" data-en="Agenda" data-es="Agenda">Agenda</a>
+    <a href="#photos" data-en="Photos" data-es="Fotos">Fotos</a>
+    <a href="#companies" data-en="Companies" data-es="Empresas">Empresas</a>
+    <a href="#foro" class="new-tag" style="margin-right: 20px;" data-en="Forum" data-es="Foro">Foro</a>
+    <a href="#toolbox" class="new-tag" style="margin-right: 20px;" data-en="ToolBox" data-es="ToolBox">ToolBox</a>
+    <a href="#faq" data-en="FAQ" data-es="FAQ">FAQ</a>
   </div>
-  <button class="lang-btn">ES</button>
+  <button class="lang-btn" onclick="toggleLang()">EN</button>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">AI REVOLUTION IN LATAM</div>
-  <h1>Mini<span>Foro</span> IA Uruguay</h1>
-  <p>Donde los líderes tecnológicos de Uruguay y América Latina comparten su visión sobre el futuro de la inteligencia artificial.</p>
+  <div class="hero-badge" data-en="URUGUAY · TECH & BUSINESS" data-es="URUGUAY · TECH & BUSINESS">URUGUAY · TECH & BUSINESS</div>
+  <h1 data-en="Uruguay talks about&lt;br&gt;&lt;span&gt;Artificial Intelligence&lt;/span&gt;" data-es="Uruguay habla sobre&lt;br&gt;&lt;span&gt;Inteligencia Artificial&lt;/span&gt;">Uruguay habla sobre<br><span>Inteligencia Artificial</span></h1>
+  <p data-en="Business and tech leaders gather at Fabian Kopel's Mini AI Forum to explore how AI is transforming industries." data-es="Líderes empresariales y tecnológicos se reúnen en el Mini Foro de IA de Fabián Kopel para explorar cómo la IA está transformando las industrias.">Líderes empresariales y tecnológicos se reúnen en el Mini Foro de IA de Fabián Kopel para explorar cómo la IA está transformando las industrias.</p>
+  <div class="hero-meta">
+    <span>📍 Montevideo, Uruguay</span>
+    <span>📅 2026</span>
+    <span>👥 32 participantes</span>
+  </div>
 </div>
 
-<section id="experts">
-  <h2>Agenda del Foro</h2>
-  <p class="section-subtitle">Expertos y emprendedores liderando la transformación con IA</p>
-  <div class="grid large">
-    <div class="card">
-      <h4>Nicolas Jodal</h4>
-      <div class="role">CEO GeneXus / Globant</div>
-      <p>Desde 1988 reimaginando cómo se construye software — ahora con IA.</p>
+<!-- HOW THE DAY UNFOLDS — TIMELINE VERTICAL -->
+<section id="format">
+  <div class="section-label" data-en="EVENT FORMAT" data-es="FORMATO DEL EVENTO">FORMATO DEL EVENTO</div>
+  <h2 data-en="How the Day Unfolds" data-es="Cómo es la Dinámica">Cómo es la Dinámica</h2>
+  <p class="subtitle" data-en="An intimate, dynamic, and informal gathering — designed to spark real conversation." data-es="Una reunión íntima, dinámica e informal diseñada para generar conversaciones reales.">Una reunión íntima, dinámica e informal diseñada para generar conversaciones reales.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">11:00 – 11:20</div>
+      <div class="tl-title" data-en="👥 Welcome & Introductions" data-es="👥 Bienvenida e Introducciones">👥 Bienvenida e Introducciones</div>
+      <div class="tl-desc" data-en="Participants introduce themselves with their company and role. Conducted via deck. Coffee from the very start." data-es="Los participantes se presentan con su empresa y rol. Conducido mediante presentación. Café desde el inicio.">Los participantes se presentan con su empresa y rol. Conducido mediante presentación. Café desde el inicio.</div>
     </div>
-    <div class="card">
-      <h4>Ariel Lipchutz</h4>
-      <div class="role">Founder IA2 Agency</div>
-      <p>Convirtiendo la promesa de la IA en resultados reales para empresas.</p>
+    <div class="tl-item">
+      <div class="tl-time">11:20 – 12:50</div>
+      <div class="tl-title" data-en="🔧 Expert Roundtable" data-es="🔧 Mesa Redonda de Expertos">🔧 Mesa Redonda de Expertos</div>
+      <div class="tl-desc" data-en="10 presentations of 10 minutes each. Each expert shares their vision of AI in their industry. Moderator: Fabián Kopel." data-es="10 presentaciones de 10 minutos cada una. Cada experto comparte su visión de IA en su industria. Moderador: Fabián Kopel.">10 presentaciones de 10 minutos cada una. Cada experto comparte su visión de IA en su industria. Moderador: Fabián Kopel.</div>
     </div>
-    <div class="card">
-      <h4>Andi Bzurovski</h4>
-      <div class="role">AI Lead</div>
-      <p>Conectando inteligencia artificial con la operación real de los negocios.</p>
+    <div class="tl-item">
+      <div class="tl-time">12:50 – 14:30</div>
+      <div class="tl-title" data-en="🏢 CEO Roundtable" data-es="🏢 Mesa Redonda de CEOs">🏢 Mesa Redonda de CEOs</div>
+      <div class="tl-desc" data-en="Each executive presents their pain points in 3 minutes. 10-min blocks with direct exchange with experts. Light food served at 12:50, salads & asado at 13:30." data-es="Cada ejecutivo presenta sus desafíos en 3 minutos. Bloques de 10 min con intercambio directo con expertos. Comida ligera a las 12:50, ensaladas y asado a las 13:30.">Cada ejecutivo presenta sus desafíos en 3 minutos. Bloques de 10 min con intercambio directo con expertos. Comida ligera a las 12:50, ensaladas y asado a las 13:30.</div>
     </div>
-    <div class="card">
-      <h4>Diego Gamba</h4>
-      <div class="role">CEO MercadoLibre Uruguay</div>
-      <p>Liderando el marketplace más grande de LatAm desde Uruguay.</p>
-    </div>
-    <div class="card">
-      <h4>Daniel Gandara</h4>
-      <div class="role">VP Producto IT</div>
-      <p>Construyendo los productos que mueven el ecommerce de un continente.</p>
-    </div>
-    <div class="card">
-      <h4>Esteban "Tibi" Ordano</h4>
-      <div class="role">Cofundador Decentraland</div>
-      <p>Creó un mundo virtual descentralizado antes de que el metaverso fuera mainstream.</p>
-    </div>
-    <div class="card">
-      <h4>Matias Boix</h4>
-      <div class="role">SVP Globant X</div>
-      <p>Liderando la transformación digital desde el laboratorio de innovación de Globant.</p>
-    </div>
-    <div class="card">
-      <h4>Gaston Milano</h4>
-      <div class="role">CEO Globant Enterprise AI</div>
-      <p>Llevando IA empresarial a las compañías más grandes del planeta.</p>
-    </div>
-    <div class="card">
-      <h4>Leo Alvarez</h4>
-      <div class="role">Founder Fenicio</div>
-      <p>Democratizando el ecommerce para que cualquier negocio en LatAm pueda vender online.</p>
-    </div>
-    <div class="card">
-      <h4>Andres Marrero</h4>
-      <div class="role">Founder Cardinal / Global Commerce Uruguay</div>
-      <p>Conectando marcas uruguayas con el comercio digital global.</p>
+    <div class="tl-item">
+      <div class="tl-time" style="color: #10b981;">14:30 en adelante</div>
+      <div class="tl-title" data-en="🤝 Open Networking" data-es="🤝 Networking Abierto">🤝 Networking Abierto</div>
+      <div class="tl-desc" data-en="The entire afternoon available to talk with experts, exchange ideas, and schedule future meetings. No clock, no protocol." data-es="Toda la tarde disponible para hablar con expertos, intercambiar ideas y agendar reuniones futuras. Sin reloj, sin protocolo.">Toda la tarde disponible para hablar con expertos, intercambiar ideas y agendar reuniones futuras. Sin reloj, sin protocolo.</div>
     </div>
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- FORUM AGENDA -->
+<section id="agenda">
+  <div class="section-label" data-en="PROGRAM" data-es="PROGRAMA">PROGRAMA</div>
+  <h2 data-en="Forum Agenda" data-es="Agenda del Foro">Agenda del Foro</h2>
+  <p class="subtitle" data-en="Times confirmed in Uruguay time. Click on each speaker to see their story and video." data-es="Horarios confirmados en hora de Uruguay. Haz clic en cada orador para ver su historia y video.">Horarios confirmados en hora de Uruguay. Haz clic en cada orador para ver su historia y video.</p>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1qsbjW4O7YmzXygo_tnwu4rs-fa1KtCr8=s400" alt="Mesa"></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:00 – 11:20</span>
+      <div class="ag-name" data-en="Welcome" data-es="Bienvenida">Bienvenida</div>
+      <div class="ag-desc" data-en="Introductions — Company & Role (deck)" data-es="Introducciones — Empresa y Rol (presentación)">Introducciones — Empresa y Rol (presentación)</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1qsbjW4O7YmzXygo_tnwu4rs-fa1KtCr8=s400" alt="Mesa"></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:20 – 11:30</span>
+      <div class="ag-name" data-en="Opening" data-es="Apertura">Apertura</div>
+      <div class="ag-desc" data-en="Moderator: Fabián Kopel · Overview of scope and objectives (10 min)" data-es="Moderador: Fabián Kopel · Descripción general del alcance y objetivos (10 min)">Moderador: Fabián Kopel · Descripción general del alcance y objetivos (10 min)</div>
+    </div>
+  </div>
+
+  <div class="agenda-item" data-video="1F70iq5Zeu2Mp0zhMWW4Wqtujnuf56nhm">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1Lb4dvZpbo6WEKUETNsGVj_yXHJVh9V1p=s400" alt="Nicolas Jodal"></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:30 – 11:40</span> <span class="badge-tag">con Gisella Bertelli</span>
+      <div class="ag-name">Nicolas Jodal</div>
+      <div class="ag-role" data-en="CEO GeneXus / Globant" data-es="CEO GeneXus / Globant">CEO GeneXus / Globant</div>
+      <div class="ag-desc" data-en="Since 1988 reimagining how software is built — now with AI." data-es="Desde 1988 reimaginando cómo se construye software — ahora con IA.">Desde 1988 reimaginando cómo se construye software — ahora con IA.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item" data-video="1JGe3Wm7yCmmfz-INdTN2Qryp6vsnO3f6">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1dvLyV6XXyKTgQ6P3m7xR9U2DW4Lgdeos=s400" alt="Ariel Lipchutz"></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:40 – 11:50</span> <span class="badge-tag">Invitado especial Bs As</span>
+      <div class="ag-name">Ariel Lipchutz</div>
+      <div class="ag-role" data-en="Founder · IA2 Agency" data-es="Fundador · IA2 Agency">Fundador · IA2 Agency</div>
+      <div class="ag-desc" data-en="Turning the promise of AI into real results for companies." data-es="Convirtiendo la promesa de la IA en resultados reales para empresas.">Convirtiendo la promesa de la IA en resultados reales para empresas.</div>
+      <div class="microcopy-note">⚠️ Video no disponible por razones técnicas</div>
+    </div>
+  </div>
+
+  <div class="agenda-item" data-video="1HqNogE9Z49esqOovnnCmKaPPYD55vZy0">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1ImOIODx9aD2N6jmtzMpDg7AzP2Lklurg=s400" alt="Andres Bzurovski"></div>
+    <div class="agenda-content">
+      <span class="ag-time">11:50 – 12:00</span>
+      <div class="ag-name">Andres Bzurovski</div>
+      <div class="ag-role" data-en="CEO · Vixion / Bankingly" data-es="CEO · Vixion / Bankingly">CEO · Vixion / Bankingly</div>
+      <div class="ag-desc" data-en="Building the infrastructure of digital banking in LatAm." data-es="Construyendo la infraestructura de banca digital en Latinoamérica.">Construyendo la infraestructura de banca digital en Latinoamérica.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1jJ8NT0I9JFUxWdB4qkAdT7jYhI_CYalh=s400" alt="Diego Gamba"></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:00 – 12:10</span>
+      <div class="ag-name">Diego Gamba</div>
+      <div class="ag-role" data-en="Director · MercadoLibre" data-es="Director · MercadoLibre">Director · MercadoLibre</div>
+      <div class="ag-desc" data-en="Data and AI at scale in Latin America's largest marketplace." data-es="Datos e IA a escala en el mayor marketplace de Latinoamérica.">Datos e IA a escala en el mayor marketplace de Latinoamérica.</div>
+      <div class="microcopy-note">⚠️ Video no disponible por razones técnicas</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/18PqOpU8o-qNhWkjkD1-tK27UQaoA46B6=s400" alt="Esteban Ordano"></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:10 – 12:20</span>
+      <div class="ag-name">Esteban Ordano</div>
+      <div class="ag-role" data-en="Founder · Decentraland" data-es="Fundador · Decentraland">Fundador · Decentraland</div>
+      <div class="ag-desc" data-en="Pioneering virtual worlds and the intersection of AI + Web3." data-es="Pionero en mundos virtuales y la intersección de IA + Web3.">Pionero en mundos virtuales y la intersección de IA + Web3.</div>
+      <div class="microcopy-note">⚠️ Video no disponible por razones técnicas</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/11o85NoDOJJJ1QyO3P-D7EoC7RNeb66Q7=s400" alt="Matias Boix"></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:20 – 12:30</span>
+      <div class="ag-name">Matias Boix</div>
+      <div class="ag-role" data-en="VP Engineering · Auth0 / Okta" data-es="VP Ingeniería · Auth0 / Okta">VP Ingeniería · Auth0 / Okta</div>
+      <div class="ag-desc" data-en="Identity, security, and AI-driven authentication systems." data-es="Identidad, seguridad y sistemas de autenticación impulsados por IA.">Identidad, seguridad y sistemas de autenticación impulsados por IA.</div>
+      <div class="microcopy-note">⚠️ Video no disponible por razones técnicas</div>
+    </div>
+  </div>
+
+  <div class="agenda-item" data-video="1Me_5OQd7hqTMIewpi65w8_5IkodSxew-">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1FEDDxtGjOn3eC_GPSBf2iayDy3nMTYF0=s400" alt="Gaston Milano"></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:30 – 12:40</span>
+      <div class="ag-name">Gastón Milano</div>
+      <div class="ag-role" data-en="AI Engineer · Globant" data-es="Ingeniero de IA · Globant">Ingeniero de IA · Globant</div>
+      <div class="ag-desc" data-en="From code to intelligence — building AI-native applications." data-es="Del código a la inteligencia — construyendo aplicaciones nativas de IA.">Del código a la inteligencia — construyendo aplicaciones nativas de IA.</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1LLL2Q56mFomVhqi-jTkddWT0DNeJBu1K=s400" alt="Leo Alvarez"></div>
+    <div class="agenda-content">
+      <span class="ag-time">12:40 – 12:50</span>
+      <div class="ag-name">Leo Alvarez</div>
+      <div class="ag-role" data-en="AI Specialist · Fenicio" data-es="Especialista en IA · Fenicio">Especialista en IA · Fenicio</div>
+      <div class="ag-desc" data-en="Applied AI for business transformation and process optimization." data-es="IA aplicada para transformación de negocios y optimización de procesos.">IA aplicada para transformación de negocios y optimización de procesos.</div>
+      <div class="microcopy-note">⚠️ Video no disponible por razones técnicas</div>
+    </div>
+  </div>
+
+  <div class="agenda-item" style="border-left-color: #f59e0b;">
+    <div class="agenda-img" style="background: linear-gradient(135deg, #3a2a00, #1a1500);"><img src="https://lh3.googleusercontent.com/d/1qsbjW4O7YmzXygo_tnwu4rs-fa1KtCr8=s400" alt="Mesa"></div>
+    <div class="agenda-content">
+      <span class="ag-time" style="color:#f59e0b;">12:50 – 14:30</span>
+      <div class="ag-name" data-en="CEO & Executive Roundtable" data-es="Mesa Redonda de CEOs y Ejecutivos">Mesa Redonda de CEOs y Ejecutivos</div>
+      <div class="ag-desc" data-en="Light food · Direct exchange with experts · Groups of 3" data-es="Comida ligera · Intercambio directo con expertos · Grupos de 3">Comida ligera · Intercambio directo con expertos · Grupos de 3</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EVENT PHOTOS — CAROUSEL -->
+<section id="photos">
+  <div class="section-label" data-en="MOMENTS" data-es="MOMENTOS">MOMENTOS</div>
+  <h2 data-en="Event Photos" data-es="Fotos del Evento">Fotos del Evento</h2>
+  <p class="subtitle" data-en="Highlights from the Forum." data-es="Momentos destacados del Foro.">Momentos destacados del Foro.</p>
+
+  <div class="carousel-container">
+    <div class="carousel-arrows">
+      <button onclick="scrollCarousel(-1)">◀</button>
+      <button onclick="scrollCarousel(1)">▶</button>
+    </div>
+    <div class="carousel-track" id="carouselTrack">
+      <img src="https://lh3.googleusercontent.com/d/1ojTws69-ETOnslC6N1WoxnFHaohZopGv=s400" alt="Photo 1" class="photo-item">
+      <img src="https://lh3.googleusercontent.com/d/1oJ7x9aMXnF8KIX8y7uhWEs9xs1sDfPEa=s400" alt="Photo 2" class="photo-item">
+      <img src="https://lh3.googleusercontent.com/d/1-pCzf0pwdgK3PvajilDY_qPg4-Eco9Ng=s400" alt="Photo 3" class="photo-item">
+      <img src="https://lh3.googleusercontent.com/d/1Uec9I6Gk3e9qZOeLiI14GzfQ3kU8zMia=s400" alt="Photo 4" class="photo-item">
+      <img src="https://lh3.googleusercontent.com/d/1fCt-LPxEaRujUV5EdmQPBm3tpom3aDd5=s400" alt="Photo 5" class="photo-item">
+      <img src="https://lh3.googleusercontent.com/d/1Sg9uPhXV8LYZzMBrmtbhu8NkdhA1wLgS=s400" alt="Photo 6" class="photo-item">
+      <img src="https://lh3.googleusercontent.com/d/1qsbjW4O7YmzXygo_tnwu4rs-fa1KtCr8=s400" alt="Mesa" class="photo-item">
+    </div>
+    <div class="carousel-nav" id="carouselNav"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CEOs & EXECUTIVES -->
 <section id="companies">
-  <h2>CEOs</h2>
-  <p class="section-subtitle">Líderes empresariales transformando sectores</p>
-  <div class="companies-grid">
+  <div class="section-label" data-en="COMPANIES" data-es="EMPRESAS">EMPRESAS</div>
+  <h2 data-en="CEOs & Executives" data-es="CEOs y Directivos">CEOs y Directivos</h2>
+  <p class="subtitle" data-en="The business leaders joining the conversation." data-es="Los líderes empresariales que se unen a la conversación.">Los líderes empresariales que se unen a la conversación.</p>
+
+  <div class="cards-grid">
     <div class="card">
-      <h4>Sebastian Sanchez</h4>
-      <div class="role">CEO KS-NX</div>
-      <p>Construyendo el futuro inmobiliario de Uruguay desde la arquitectura y la innovación.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1VRMpPmw6twrtdpxvwDcgF7uFoxTF_tTA=s400" alt="Sebastian Sanchez" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Sebastian Sanchez</h4><span class="role">CEO</span><br><span class="company">KS-NX</span></div>
     </div>
     <div class="card">
-      <h4>Gonzalo Pittaluga</h4>
-      <div class="role">Director Pittaluga KS Contable</div>
-      <p>Transformando la contabilidad en una herramienta estratégica para los negocios.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1lCJzTZHPDX3qAv8AmZ0b5i-n5BPQX5t-=s400" alt="Gonzalo Pittaluga" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Gonzalo Pittaluga</h4><span class="role">Director</span><br><span class="company">Pittaluga KS Contable</span></div>
     </div>
     <div class="card">
-      <h4>Martin Eurnekian</h4>
-      <div class="role">CEO Corporación América</div>
-      <p>Conectando continentes desde los aeropuertos hasta los campos.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1YuTEeRReeTUrjCVhr3pkyCBMZdPD5IJn=s400" alt="Martin Eurnekian" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Martin Eurnekian</h4><span class="role">CEO</span><br><span class="company">Corporación América</span></div>
     </div>
     <div class="card">
-      <h4>Martin Dovat</h4>
-      <div class="role">Director Zonamerica</div>
-      <p>Construyendo el ecosistema empresarial más innovador de Uruguay.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1-IeAwNhinT5fsZOwlWDM_VxWmlClNu7G=s400" alt="Martin Dovat" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Martin Dovat</h4><span class="role">Director</span><br><span class="company">Zonamerica</span></div>
     </div>
     <div class="card">
-      <h4>Orlando Dovat</h4>
-      <div class="role">Fundador Zonamerica</div>
-      <p>El visionario que creó el Silicon Valley uruguayo.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1vXEbny8nh_kAwBgqWePjCLtRCnrUhDtq=s400" alt="Orlando Dovat" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Orlando Dovat</h4><span class="role">Fundador</span><br><span class="company">Zonamerica</span></div>
     </div>
     <div class="card">
-      <h4>Juan Manuel Parada</h4>
-      <div class="role">CEO Tienda Inglesa</div>
-      <p>Reinventando el retail uruguayo con visión de futuro.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/19-eTxyPUms4M0T0Xef7kUxddHY8OQPjQ=s400" alt="Juan Manuel Parada" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Juan Manuel Parada</h4><span class="role">CEO</span><br><span class="company">Tienda Inglesa</span></div>
     </div>
     <div class="card">
-      <h4>Joaquin Cabrera</h4>
-      <div class="role">CEO Ciemsa CSI Ingeniería</div>
-      <p>Ingeniería de clase mundial con raíces uruguayas.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/18uT3cHbN_Xi2xoVHPC_NQOYFrvRIfcg0=s400" alt="Joaquin Cabrera" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Joaquin Cabrera</h4><span class="role">CEO</span><br><span class="company">Ciemsa CSI Ingeniería</span></div>
     </div>
     <div class="card">
-      <h4>Agustin Tafernaberry</h4>
-      <div class="role">CEO Itaú Uruguay</div>
-      <p>Transformando la banca en Uruguay con innovación y escala latinoamericana.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1bEjky-Ce-EM4K-aQWFbzLlPa3qYnerm8=s400" alt="Agustin Tafernaberry" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Agustin Tafernaberry</h4><span class="role">CEO</span><br><span class="company">Itaú Uruguay</span></div>
     </div>
     <div class="card">
-      <h4>Andres Packziarz</h4>
-      <div class="role">Director Joacamar-Xion</div>
-      <p>Conectando tecnología con los sectores más tradicionales de la economía.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1VPGAKxHCnsBqzAL-NfBt3RE4HgqpYNrx=s400" alt="Andres Packziarz" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Andres Packziarz</h4><span class="role">Director</span><br><span class="company">Joacamar-Xion</span></div>
     </div>
     <div class="card">
-      <h4>Natty Manhard</h4>
-      <div class="role">Directora Chic Parisien</div>
-      <p>Llevando la moda uruguaya a nuevos horizontes con visión empresarial.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1GeMEbRLnjZbBl_bg99Pq-40ECi5QZ7Ot=s400" alt="Natty Manhard" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Natty Manhard</h4><span class="role">Directora</span><br><span class="company">Chic Parisien</span></div>
     </div>
     <div class="card">
-      <h4>Diego Forlán</h4>
-      <div class="role">Fundador DFC Club Deportivo</div>
-      <p>Del Balón de Oro al mundo de los negocios — los campeones no se retiran, se transforman.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1AVPAmu63dvIGBSQ3Nv5Oc07xtYLSLafV=s400" alt="Diego Forlán" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Diego Forlán</h4><span class="role">Fundador</span><br><span class="company">DFC Club Deportivo</span></div>
     </div>
     <div class="card">
-      <h4>Alejandro Gerwer</h4>
-      <div class="role">Director Casa Jorge Importación</div>
-      <p>Tradición importadora con mentalidad de innovación.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/17uubijv7gCMbR7PgptLrGjn8OJFNjUAx=s400" alt="Alejandro Gerwer" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Alejandro Gerwer</h4><span class="role">Director</span><br><span class="company">Casa Jorge Importación</span></div>
     </div>
     <div class="card">
-      <h4>Pipe Stein</h4>
-      <div class="role">Director Notable Publicidad</div>
-      <p>Creatividad que trasciende los formatos — de la publicidad tradicional a la IA generativa.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/17PnPscyZ7eXKZvP-V4-cdqJLBYnGmHzo=s400" alt="Pipe Stein" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Pipe Stein</h4><span class="role">Director</span><br><span class="company">Notable Publicidad</span></div>
     </div>
     <div class="card">
-      <h4>Diego Lev</h4>
-      <div class="role">Co-Director Notable Publicidad</div>
-      <p>Donde otros ven anuncios, él ve experiencias que cambian percepciones.</p>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1DpZBBKhhALE6eyl-tHgF4W_TJX0Sunv2=s400" alt="Diego Lev" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Diego Lev</h4><span class="role">Co-Director</span><br><span class="company">Notable Publicidad</span></div>
     </div>
   </div>
 </section>
 
-<section id="leaders">
-  <h2>Ecosystem Leaders</h2>
-  <p class="section-subtitle">Visionarios que han transformado el ecosistema tech</p>
-  <div class="leaders-container">
+<div class="section-divider"></div>
+
+<!-- ECOSYSTEM LEADERS -->
+<section>
+  <div class="section-label" data-en="INVITADOS" data-es="INVITADOS">INVITADOS</div>
+  <h2 data-en="Ecosystem Leaders" data-es="Líderes del Ecosistema">Líderes del Ecosistema</h2>
+  <p class="subtitle" data-en="Founders and icons of Latin American tech who are part of this conversation." data-es="Fundadores e íconos del tech latinoamericano que forman parte de esta conversación.">Fundadores e íconos del tech latinoamericano que forman parte de esta conversación.</p>
+
+  <div class="leaders-grid">
     <div class="leader-chip">
-      <div class="name">Mati Wolosky</div>
-      Emprendedor Tech
+      <div class="avatar"><img src="https://lh3.googleusercontent.com/d/1uowNuQY5aWCNbhZBdbQF13I-Jo13T0CU=s400" alt="Mati Wolosky" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="info"><div class="name">Mati Wolosky</div><div class="org">Tech Entrepreneur</div></div>
     </div>
     <div class="leader-chip">
-      <div class="name">Sergio Fogel</div>
-      Cofundador dLocal
+      <div class="avatar">SF</div>
+      <div class="info"><div class="name">Sergio Fogel</div><div class="org">dLocal</div></div>
     </div>
     <div class="leader-chip">
-      <div class="name">Hernan Kazah</div>
-      Cofundador Kaszek Ventures
+      <div class="avatar"><img src="https://lh3.googleusercontent.com/d/1iR7x7CjWwJjJhOdcU0t8jle-MzPrUaW6=s400" alt="Hernan Kazah" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="info"><div class="name">Hernan Kazah</div><div class="org">Kaszek Ventures</div></div>
     </div>
     <div class="leader-chip">
-      <div class="name">Guibert Englebienne</div>
-      CTO Globant
+      <div class="avatar"><img src="https://lh3.googleusercontent.com/d/1lg_8oYS6Vc2zlMy0v7SLn1wDoC7K_IH4=s400" alt="Guibert Englebienne" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="info"><div class="name">Guibert Englebienne</div><div class="org">Globant</div></div>
     </div>
     <div class="leader-chip">
-      <div class="name">Martin Migoya</div>
-      CEO Globant
+      <div class="avatar"><img src="https://lh3.googleusercontent.com/d/1OW4pXiznhBsy-T4BoxFhzeJTGnLNUcFp=s400" alt="Martin Migoya" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="info"><div class="name">Martin Migoya</div><div class="org">Globant</div></div>
     </div>
     <div class="leader-chip">
-      <div class="name">Martin Delosantos</div>
-      CFO MercadoLibre
-    </div>
-    <div class="leader-chip">
-      <div class="name">Borja Bergman</div>
-      Emprendedor IA
-    </div>
-    <div class="leader-chip">
-      <div class="name">Nico Bergman</div>
-      Emprendedor IA
+      <div class="avatar"><img src="https://lh3.googleusercontent.com/d/1AHL1I-85FGW5f4W4Ysw7T1ATmDkJLXBW=s400" alt="Martin Delosantos" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="info"><div class="name">Martin Delosantos</div><div class="org">MercadoLibre</div></div>
     </div>
   </div>
 </section>
 
-<section id="forum">
-  <h2>Community Forum</h2>
+<div class="section-divider"></div>
+
+<!-- FORO -->
+<section id="foro">
+  <div class="section-label" data-en="COMMUNITY" data-es="COMUNIDAD">COMUNIDAD</div>
+  <h2 data-en="Foro" data-es="Foro">Foro</h2>
+  <p class="subtitle" data-en="Open space to share ideas, opinions and tools." data-es="Espacio abierto para compartir ideas, opiniones y herramientas.">Espacio abierto para compartir ideas, opiniones y herramientas.</p>
+
   <div class="forum-container">
-    <div class="forum-threads">
-      <div class="forum-thread">
-        <div class="forum-thread-title">¿Cuál es el verdadero impacto de la IA en el ecommerce?</div>
-        <div class="forum-thread-meta">Por Diego Gamba • 2.3k views • 48 responses</div>
-      </div>
-      <div class="forum-thread">
-        <div class="forum-thread-title">Métodos más efectivos para implementar IA en empresas tradicionales</div>
-        <div class="forum-thread-meta">Por Ariel Lipchutz • 1.8k views • 32 responses</div>
-      </div>
-      <div class="forum-thread">
-        <div class="forum-thread-title">El futuro del low-code y la IA: ¿reemplazará a los desarrolladores?</div>
-        <div class="forum-thread-meta">Por Nicolas Jodal • 3.1k views • 67 responses</div>
-      </div>
-      <div class="forum-thread">
-        <div class="forum-thread-title">Uruguay como hub global de talento tech — casos de éxito</div>
-        <div class="forum-thread-meta">Por Hernan Kazah • 2.6k views • 41 responses</div>
-      </div>
-      <div class="forum-thread">
-        <div class="forum-thread-title">Seguridad y privacidad en implementaciones de IA empresarial</div>
-        <div class="forum-thread-meta">Por Andi Bzurovski • 1.5k views • 28 responses</div>
+    <div class="forum-input">
+      <textarea id="forumText" placeholder="Compartí tu opinión, una herramienta de IA, o un recurso útil..."></textarea>
+      <div class="input-actions">
+        <span class="input-hint" data-en="💡 URLs you share are automatically added to the ToolBox" data-es="💡 Las URLs que compartas se agregan automáticamente al ToolBox">💡 Las URLs que compartas se agregan automáticamente al ToolBox</span>
+        <button class="forum-btn" onclick="addPost()" data-en="Publish" data-es="Publicar">Publicar</button>
       </div>
     </div>
-    <div class="forum-sidebar">
-      <div class="toolbox">
-        <h4>🛠 TOOLBOX</h4>
-        <ul>
-          <li>Claude API Integration</li>
-          <li>GeneXus Low-Code Platform</li>
-          <li>dLocal Payment Gateway</li>
-          <li>Decentraland SDK</li>
-          <li>Globant Enterprise AI</li>
-          <li>IA2 Agency Tools</li>
-        </ul>
+
+    <div id="forumPosts">
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">FK</div>
+          <div><span class="post-name">Fabián Kopel</span> <span class="post-company">· Organizador</span></div>
+          <span class="post-time">pre-evento</span>
+        </div>
+        <div class="post-body">Los esperamos mañana con ganas de aprender y siempre agradecidos a ustedes que estén en Uruguay, que es increíble que reúna este talento.</div>
       </div>
-      <div class="toolbox">
-        <h4>🌐 RESOURCES</h4>
-        <ul>
-          <li>AI Research Papers</li>
-          <li>LatAm Tech Reports</li>
-          <li>Case Studies</li>
-          <li>Developer Guides</li>
-          <li>Startup Funding</li>
-          <li>Global Commerce Tips</li>
-        </ul>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">GM</div>
+          <div><span class="post-name">Gastón Milano</span> <span class="post-company">· AI Engineer</span></div>
+          <span class="post-time">noche anterior</span>
+        </div>
+        <div class="post-body">Estimados, les dejo la agenda que con el mail que mandó FK me generó 'Tonga' mi agente, le pedí que generara una imagen para cada uno y una descripción y video. Nos vemos mañana:</div>
+        <a href="https://gmilano.github.io/miniforo-ia/" class="post-url" target="_blank">🔗 gmilano.github.io/miniforo-ia/</a>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">DL</div>
+          <div><span class="post-name">Diego Lev</span> <span class="post-company">· Notable Publicidad</span></div>
+          <span class="post-time">post-evento</span>
+        </div>
+        <div class="post-body">Maravilloso encuentro! Muchas gracias a los anfitriones por su generosidad y cada uno de ustedes por hacerlo tan inspirador.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">MB</div>
+          <div><span class="post-name">Matias Boix</span> <span class="post-company">· Auth0 / Okta</span></div>
+          <span class="post-time">post-evento</span>
+        </div>
+        <div class="post-body">Gracias a todos, en especial a los organizadores! Espectacular la dinámica y fue un placer aprender de todos ustedes.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">OD</div>
+          <div><span class="post-name">Orlando Dovat</span> <span class="post-company">· Zonamerica</span></div>
+          <span class="post-time">post-evento</span>
+        </div>
+        <div class="post-body">Muchas gracias a Fabián y Sebastián por la iniciativa y la generosidad de juntar a todos para compartir un enorme conocimiento y experiencia sobre IA. Un día muy importante para todos nosotros.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">EO</div>
+          <div><span class="post-name">Esteban Ordano</span> <span class="post-company">· Decentraland</span></div>
+          <span class="post-time">post-evento</span>
+        </div>
+        <div class="post-body">Hermosa jornada. Muchas gracias por organizar esto y la invitación! A las órdenes para ayudar en lo que pueda (si los agentes no alcanzan! jaja)</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">AL</div>
+          <div><span class="post-name">Ariel Lipschutz</span> <span class="post-company">· IA2 Agency</span></div>
+          <span class="post-time">herramientas</span>
+        </div>
+        <div class="post-body">Sugiero investiguen el concepto de 'vibecodear' que es algo así como promptear un sistema y que la IA desarrolle un sistema, un sitio web, una app mobile.</div>
+        <a href="https://bolt.new" class="post-url" target="_blank">🔗 bolt.new</a>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">GM</div>
+          <div><span class="post-name">Gastón Milano</span> <span class="post-company">· AI Engineer</span></div>
+          <span class="post-time">herramientas</span>
+        </div>
+        <div class="post-body">Para asistentes personales OpenClaw. Para asistentes de código Claude Code / Codex / Gemini CLI. Y enterprise: los invitamos a conocer Globant Enterprise AI.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">FK</div>
+          <div><span class="post-name">Fabián Kopel</span> <span class="post-company">· Organizador</span></div>
+          <span class="post-time">seguimiento</span>
+        </div>
+        <div class="post-body">Sería bueno si cada uno de los expertos que habló nos deja deberes para probar o nos resume las plataformas que deberíamos probar. Así aprovechamos a verlas.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">NJ</div>
+          <div><span class="post-name">Nicolas Jodal</span> <span class="post-company">· GeneXus / Globant</span></div>
+          <span class="post-time">humor</span>
+        </div>
+        <div class="post-body">Dice Guibert que las horas por el desarrollo de los sistemas te las da gratis, pero que gastamos 2 millones de tokens, me pide la razón social para pasarte la factura 😄</div>
       </div>
     </div>
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- TOOLBOX -->
+<section id="toolbox">
+  <div class="section-label" data-en="RESOURCES" data-es="RECURSOS">RECURSOS</div>
+  <h2 data-en="ToolBox" data-es="ToolBox">ToolBox</h2>
+  <p class="subtitle" data-en="AI tools and resources shared by forum participants." data-es="Herramientas de IA compartidas por los participantes del foro.">Herramientas de IA compartidas por los participantes del foro.</p>
+
+  <div class="toolbox-grid">
+    <div class="tool-card">
+      <div class="tool-icon">⚡</div>
+      <h4>bolt.new</h4>
+      <p>Plataforma de vibe coding para crear sitios web y aplicaciones con IA. Probada por Ariel Lipschutz para crear sistemas completos.</p>
+      <a href="https://bolt.new" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Ariel Lipschutz</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🎨</div>
+      <h4>Lovable</h4>
+      <p>Herramienta líder de vibe coding para crear aplicaciones web. Interfaces más pulidas y user-friendly.</p>
+      <a href="https://lovable.dev" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Gastón Milano y Martin Dovat</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">💻</div>
+      <h4>Claude Code</h4>
+      <p>Asistente de código por terminal de Anthropic para equipos y personas. Uno de los líderes en coding assistants.</p>
+      <a href="https://claude.ai" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Gastón Milano</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🤖</div>
+      <h4>OpenClaw</h4>
+      <p>Máquina personal de IA. Muy recomendado con precaución en seguridad, especialmente para no coders.</p>
+      <a href="https://openclaw.ai" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Nik Bergman</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📱</div>
+      <h4>Rork</h4>
+      <p>Plataforma para crear apps mobile con IA. Ideal para prototipos rápidos.</p>
+      <a href="https://rork.com" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Ariel Lipschutz</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📋</div>
+      <h4>Manus AI</h4>
+      <p>Agente de IA para tareas complejas como revisión de documentos legales y análisis.</p>
+      <a href="https://manus.im" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Sergio Fogel</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔗</div>
+      <h4>Paperclip</h4>
+      <p>Herramienta para generar agentes que interactúen entre sí. Red de agentes para contenido automatizado.</p>
+      <a href="https://paperclip.ing" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Ariel Lipschutz</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🏢</div>
+      <h4>Globant Enterprise AI</h4>
+      <p>Plataforma enterprise cross-model, cross-agent, cross-cloud con data science.</p>
+      <a href="https://www.globant.com/services/ai" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Gastón Milano</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- QUOTE -->
+<section>
+  <div class="quote-block">
+    <div class="quote-text" data-en=""Business leaders gather to explore how AI is transforming industries."" data-es=""Los esperamos mañana con ganas de aprender y siempre agradecidos a ustedes que estén en Uruguay, que es increíble que reúna este talento."">Los esperamos mañana con ganas de aprender y siempre agradecidos a ustedes que estén en Uruguay, que es increíble que reúna este talento.</div>
+    <div class="quote-author" data-en="— Fabián Kopel, organizer" data-es="— Fabián Kopel, organizador">— Fabián Kopel, organizador</div>
+    <div class="quote-special">
+      <div class="star">⭐</div>
+      <p data-en="&lt;strong&gt;Diego Forlán&lt;/strong&gt; — Best player of World Cup 2010 · Founder DFC Sports Club. Present as &lt;strong style="color:#f59e0b;"&gt;quintessential Uruguayan talent&lt;/strong&gt; and entrepreneur." data-es="&lt;strong&gt;Diego Forlán&lt;/strong&gt; — Mejor jugador del Mundial 2010 · Fundador DFC Club Deportivo. Presente como &lt;strong style="color:#f59e0b;"&gt;talento uruguayo por excelencia&lt;/strong&gt; y empresario."><strong>Diego Forlán</strong> — Mejor jugador del Mundial 2010 · Fundador DFC Club Deportivo. Presente como <strong style="color:#f59e0b;">talento uruguayo por excelencia</strong> y empresario.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">FAQ</div>
+  <h2 data-en="Frequently Asked Questions" data-es="Preguntas Frecuentes">Preguntas Frecuentes</h2>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q" data-en="What is the Mini AI Forum?" data-es="¿Qué es el Mini Foro de IA?"><span class="arrow">▼</span> <span style="flex:1; text-align:left;">¿Qué es el Mini Foro de IA?</span></div>
+    <div class="faq-a" data-en="An intimate gathering of tech experts and business leaders in Montevideo, Uruguay, organized by Fabián Kopel to explore how AI is transforming industries. Limited to ~32 participants for meaningful conversation." data-es="Una reunión íntima de expertos en tecnología y líderes empresariales en Montevideo, Uruguay, organizada por Fabián Kopel para explorar cómo la IA está transformando las industrias. Limitada a ~32 participantes para una conversación significativa.">Una reunión íntima de expertos en tecnología y líderes empresariales en Montevideo, Uruguay, organizada por Fabián Kopel para explorar cómo la IA está transformando las industrias. Limitada a ~32 participantes para una conversación significativa.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q" data-en="Who can attend?" data-es="¿Quién puede asistir?"><span class="arrow">▼</span> <span style="flex:1; text-align:left;">¿Quién puede asistir?</span></div>
+    <div class="faq-a" data-en="The forum is by invitation only. It brings together CEOs, founders, and AI specialists from Uruguay and the region to foster direct, high-quality exchanges." data-es="El foro es por invitación únicamente. Reúne a CEOs, fundadores y especialistas en IA de Uruguay y la región para fomentar intercambios directos y de alta calidad.">El foro es por invitación únicamente. Reúne a CEOs, fundadores y especialistas en IA de Uruguay y la región para fomentar intercambios directos y de alta calidad.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q" data-en="How can I contact Fabián?" data-es="¿Cómo puedo contactar a Fabián?"><span class="arrow">▼</span> <span style="flex:1; text-align:left;">¿Cómo puedo contactar a Fabián?</span></div>
+    <div class="faq-a" data-en="You can reach Fabián Kopel through LinkedIn or via the contact form on the Kopel Sánchez website. He is always open to connecting with people passionate about AI and technology." data-es="Puedes contactar a Fabián Kopel a través de LinkedIn o mediante el formulario de contacto en el sitio web de Kopel Sánchez. Siempre está abierto a conectar con personas apasionadas por IA y tecnología.">Puedes contactar a Fabián Kopel a través de LinkedIn o mediante el formulario de contacto en el sitio web de Kopel Sánchez. Siempre está abierto a conectar con personas apasionadas por IA y tecnología.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q" data-en="What is the ToolBox?" data-es="¿Qué es el ToolBox?"><span class="arrow">▼</span> <span style="flex:1; text-align:left;">¿Qué es el ToolBox?</span></div>
+    <div class="faq-a" data-en="A curated collection of AI tools and resources shared by forum participants. When someone shares a URL in the Foro section, it is automatically added to the ToolBox." data-es="Una colección curada de herramientas de IA y recursos compartidos por participantes del foro. Cuando alguien comparte una URL en la sección Foro, se agrega automáticamente a ToolBox.">Una colección curada de herramientas de IA y recursos compartidos por participantes del foro. Cuando alguien comparte una URL en la sección Foro, se agrega automáticamente a ToolBox.</div>
+  </div>
+</section>
+
+<!-- VIDEO MODAL -->
 <div class="modal-overlay" id="videoModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeVideoModal()">✕</button>
     <iframe id="modalVideo" class="modal-video" allow="autoplay"></iframe>
     <div class="modal-title" id="modalTitle"></div>
     <div class="modal-role" id="modalRole"></div>
-    <div class="modal-tagline" id="modalTagline" style="color:#f59e0b; font-style:italic; font-size:0.9rem; margin-bottom:12px;"></div>
-    <div class="modal-section-label" style="color:#2196F3; font-size:0.7rem; font-weight:700; letter-spacing:1px; margin-bottom:4px;">SU HISTORIA</div>
     <div class="modal-bio" id="modalBio"></div>
-    <div class="modal-section-label" style="color:#2196F3; font-size:0.7rem; font-weight:700; letter-spacing:1px; margin-top:16px; margin-bottom:4px;">LA EMPRESA</div>
-    <div class="modal-company" id="modalCompany" style="color:#aaa; font-size:0.85rem; background:#0d1225; border:1px solid #1e2740; border-radius:8px; padding:10px;"></div>
   </div>
 </div>
 
+<!-- FOOTER -->
+<footer>
+  <strong>Mini Foro <span>IA</span></strong><br>
+  <span data-en="Organized by Fabián Kopel · Montevideo, Uruguay" data-es="Organizado por Fabián Kopel · Montevideo, Uruguay">Organizado por Fabián Kopel · Montevideo, Uruguay</span><br>
+  <span style="font-size:0.7rem;">Imágenes: DALL-E 3 · Videos: Sora 2</span>
+</footer>
+
 <script>
+// TRANSLATION SYSTEM
+let currentLang = 'es';
+
+function toggleLang() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  // Button shows the OTHER language (what you'd switch to)
+  document.querySelector('.lang-btn').textContent = currentLang === 'es' ? 'EN' : 'ES';
+
+  document.querySelectorAll('[data-es][data-en]').forEach(el => {
+    const text = el.getAttribute(`data-${currentLang}`);
+    if (text) {
+      if (text.includes('<')) {
+        el.innerHTML = text;
+      } else {
+        el.textContent = text;
+      }
+    }
+  });
+}
+
+// CAROUSEL
+function scrollCarousel(dir) {
+  const track = document.getElementById('carouselTrack');
+  const scrollAmt = 312; // 300px + 12px gap
+  track.scrollBy({ left: dir * scrollAmt, behavior: 'smooth' });
+}
+
+// Generate carousel dots
+(function initCarousel() {
+  const track = document.getElementById('carouselTrack');
+  const nav = document.getElementById('carouselNav');
+  const items = track.querySelectorAll('.photo-item');
+  items.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => {
+      track.scrollTo({ left: i * 312, behavior: 'smooth' });
+    };
+    nav.appendChild(dot);
+  });
+  track.addEventListener('scroll', () => {
+    const idx = Math.round(track.scrollLeft / 312);
+    nav.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+  });
+})();
+
+// FAQ TOGGLE
+function toggleFaq(el) {
+  const answer = el.querySelector('.faq-a');
+  const arrow = el.querySelector('.arrow');
+  answer.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// VIDEO MODAL
 const speakerData = {
   'Nicolas Jodal': {
-    role: 'CEO GeneXus / Globant',
-    tagline: 'Desde 1988 reimaginando cómo se construye software — ahora con IA.',
-    bio: 'Cuando el mundo todavía programaba en terminales verdes, Nicolás ya soñaba con que las máquinas escribieran código por nosotros. Creó GeneXus en 1988 y se convirtió en pionero mundial del low-code, adelantándose tres décadas a la revolución de la IA generativa. Hoy, desde Globant, sigue demostrando que la mejor forma de predecir el futuro es inventarlo.',
-    company_desc: 'GeneXus es la plataforma pionera de desarrollo low-code que genera software automáticamente desde 1988.',
-    video: '1F70iq5Zeu2Mp0zhMWW4Wqtujnuf56nhm'
+    video: '1F70iq5Zeu2Mp0zhMWW4Wqtujnuf56nhm',
+    role: 'CEO GeneXus / Globant', roleEn: 'CEO GeneXus / Globant',
+    desc: 'Cuando el mundo todavía programaba en terminales verdes, Nicolás ya soñaba con que las máquinas escribieran código por nosotros. Creó GeneXus en 1988 y se convirtió en pionero mundial del low-code, adelantándose tres décadas a la revolución de la IA generativa. Hoy, desde Globant, sigue demostrando que la mejor forma de predecir el futuro es inventarlo.',
+    descEn: 'When the world was still programming on green terminals, Nicolás was already dreaming of machines writing code for us. He created GeneXus in 1988 and became a world pioneer of low-code, three decades ahead of the generative AI revolution. Today, from Globant, he continues to demonstrate that the best way to predict the future is to invent it.'
   },
   'Ariel Lipchutz': {
-    role: 'Founder IA2 Agency',
-    tagline: 'Convirtiendo la promesa de la IA en resultados reales para empresas.',
-    bio: 'Desde Buenos Aires, Ariel construyó IA2 Agency con una obsesión: que la inteligencia artificial deje de ser un buzzword y se convierta en revenue. Ha implementado soluciones de IA en decenas de empresas, transformando operaciones y multiplicando resultados. Su misión es simple — que cada empresa en LatAm tenga un copiloto inteligente.',
-    company_desc: 'IA2 Agency es una agencia de consultoría e implementación de IA con base en Buenos Aires.',
-    video: '1JGe3Wm7yCmmfz-INdTN2Qryp6vsnO3f6'
+    video: '1JGe3Wm7yCmmfz-INdTN2Qryp6vsnO3f6',
+    role: 'Fundador · IA2 Agency', roleEn: 'Founder · IA2 Agency',
+    desc: 'En IA² acompaña a las organizaciones en su transformación hacia un modelo de negocio impulsado por inteligencia artificial. Trabaja junto a las compañías para identificar dónde la IA puede generar mayor impacto, diseñar el roadmap de transformación y llevarlo a la práctica.',
+    descEn: 'At IA² he accompanies organizations in their transformation towards an AI-driven business model. He works with companies to identify where AI can generate the greatest impact, design the transformation roadmap and put it into practice.'
   },
-  'Andi Bzurovski': {
-    role: 'AI Lead',
-    tagline: 'Conectando inteligencia artificial con la operación real de los negocios.',
-    bio: 'Andi tiene la rara habilidad de hablar tanto el idioma de los ingenieros como el de los CEOs. Como AI Lead, conecta las capacidades más avanzadas de la inteligencia artificial con las necesidades reales del negocio, transformando procesos y creando valor medible. Su enfoque pragmático demuestra que la IA más poderosa es la que se implementa y genera resultados.',
-    company_desc: 'Consultoría y liderazgo en implementación de inteligencia artificial empresarial.',
-    video: '1HqNogE9Z49esqOovnnCmKaPPYD55vZy0'
+  'Andres Bzurovski': {
+    video: '1HqNogE9Z49esqOovnnCmKaPPYD55vZy0',
+    role: 'CEO · Vixion / Bankingly', roleEn: 'CEO · Vixion / Bankingly',
+    desc: 'Construyendo la infraestructura de banca digital en Latinoamérica. Lidera la transformación digital del sector financiero desde Uruguay.',
+    descEn: 'Building the infrastructure of digital banking in Latin America. Leading the digital transformation of the financial sector from Uruguay.'
   },
   'Diego Gamba': {
-    role: 'CEO MercadoLibre Uruguay',
-    tagline: 'Liderando el marketplace más grande de LatAm desde Uruguay.',
-    bio: 'Diego dirige la operación uruguaya de MercadoLibre, el gigante tech de América Latina. Desde Montevideo, su equipo impulsa la innovación en ecommerce, fintech y logística para millones de usuarios. Bajo su liderazgo, Uruguay se convierte en un hub clave de desarrollo e innovación para toda la región.',
-    company_desc: 'MercadoLibre es el marketplace y ecosistema de pagos más grande de América Latina.',
-    video: null
+    video: null,
+    role: 'Director · MercadoLibre', roleEn: 'Director · MercadoLibre',
+    desc: 'Datos e IA a escala en el mayor marketplace de Latinoamérica. Representa a MercadoLibre Uruguay junto a Daniel Gandara (VP IT/Producto Global).',
+    descEn: 'Data and AI at scale in Latin America\'s largest marketplace. Represents MercadoLibre Uruguay alongside Daniel Gandara (Global VP IT/Product).'
   },
-  'Daniel Gandara': {
-    role: 'VP Producto IT',
-    tagline: 'Construyendo los productos que mueven el ecommerce de un continente.',
-    bio: 'Como VP de IT y Producto de MercadoLibre a nivel global, Daniel es responsable de la tecnología que sirve a millones de transacciones diarias en toda América Latina. Su visión de producto combina escala masiva con innovación constante, liderando equipos que construyen soluciones de IA aplicada al comercio electrónico más grande de la región.',
-    company_desc: 'MercadoLibre es el marketplace y ecosistema de pagos más grande de América Latina.',
-    video: null
-  },
-  'Esteban "Tibi" Ordano': {
-    role: 'Cofundador Decentraland',
-    tagline: 'Creó un mundo virtual descentralizado antes de que el metaverso fuera mainstream.',
-    bio: 'Tibi cofundó Decentraland cuando hablar de metaverso era ciencia ficción. Su visión de mundos virtuales descentralizados se adelantó años a la conversación global, y hoy Decentraland es una de las plataformas de referencia del espacio. Desde Uruguay, demuestra que las ideas más locas son las que terminan definiendo el futuro.',
-    company_desc: 'Decentraland es una plataforma de realidad virtual descentralizada que permite crear y monetizar contenido en mundos virtuales.',
-    video: null
+  'Esteban Ordano': {
+    video: null,
+    role: 'Fundador · Decentraland', roleEn: 'Founder · Decentraland',
+    desc: 'Pionero en mundos virtuales y la intersección de IA + Web3. Creador de Decentraland, una de las plataformas de metaverso más reconocidas del mundo.',
+    descEn: 'Pioneer in virtual worlds and the intersection of AI + Web3. Creator of Decentraland, one of the most recognized metaverse platforms in the world.'
   },
   'Matias Boix': {
-    role: 'SVP Globant X',
-    tagline: 'Liderando la transformación digital desde el laboratorio de innovación de Globant.',
-    bio: 'Como SVP de Globant X, Matías lidera el brazo de innovación de una de las empresas tech más importantes del mundo. Su equipo trabaja en la frontera de la IA, diseñando las soluciones que transforman a las Fortune 500. Donde otros ven tendencias, Matías construye productos que definen el futuro de la transformación digital.',
-    company_desc: 'Globant es una empresa nativa digital listada en NYSE que ayuda a las organizaciones más grandes del mundo a reinventarse con tecnología.',
-    video: null
+    video: null,
+    role: 'VP Ingeniería · Auth0 / Okta', roleEn: 'VP Engineering · Auth0 / Okta',
+    desc: 'Identidad, seguridad y sistemas de autenticación impulsados por IA. Experimentando con detección de fraude basada en patrones de comportamiento.',
+    descEn: 'Identity, security, and AI-driven authentication systems. Experimenting with fraud detection based on behavioral patterns.'
   },
-  'Gaston Milano': {
-    role: 'CEO Globant Enterprise AI',
-    tagline: 'Llevando IA empresarial a las compañías más grandes del planeta.',
-    bio: 'Gastón lidera Globant Enterprise AI, la unidad que democratiza la inteligencia artificial para las empresas más grandes del mundo. Su plataforma permite que corporaciones multinacionales integren IA en sus operaciones de forma segura y escalable. Desde Uruguay a Fortune 500 — Gastón demuestra que el talento local puede transformar la industria global.',
-    company_desc: 'Globant Enterprise AI es la plataforma de inteligencia artificial empresarial de Globant.',
-    video: null
+  'Gastón Milano': {
+    video: '1Me_5OQd7hqTMIewpi65w8_5IkodSxew-',
+    role: 'Ingeniero de IA · Globant', roleEn: 'AI Engineer · Globant',
+    desc: 'CEO de Globant Enterprise AI, plataforma que permite llevar IA al enterprise a través de servicios nativos. Creador de "Tonga", su agente personal que generó el sitio original del Mini Foro IA.',
+    descEn: 'CEO of Globant Enterprise AI, a platform that brings AI to the enterprise through native services. Creator of "Tonga", his personal agent that generated the original Mini AI Forum site.'
   },
   'Leo Alvarez': {
-    role: 'Founder Fenicio',
-    tagline: 'Democratizando el ecommerce para que cualquier negocio en LatAm pueda vender online.',
-    bio: 'Leo creó Fenicio con la convicción de que vender online no debería ser un privilegio de las grandes empresas. Su plataforma de ecommerce empodera a miles de negocios en Uruguay y LatAm para competir en la economía digital. Donde otros veían un mercado chico, Leo vio una oportunidad enorme — y construyó la infraestructura para aprovecharla.',
-    company_desc: 'Fenicio es la plataforma de ecommerce uruguaya que permite a empresas de todos los tamaños vender online de forma profesional.',
-    video: null
-  },
-  'Andres Marrero': {
-    role: 'Founder Cardinal / Global Commerce Uruguay',
-    tagline: 'Conectando marcas uruguayas con el comercio digital global.',
-    bio: 'Andrés fundó Cardinal como agencia digital y la evolucionó hacia Global Commerce Uruguay, creando un puente entre las marcas locales y la economía digital global. Su visión combina marketing digital, ecommerce y estrategia para que las empresas uruguayas compitan de igual a igual en el mundo. Desde Montevideo, demuestra que el talento local puede escalar sin límites.',
-    company_desc: 'Global Commerce Uruguay es la empresa de comercio digital que conecta marcas locales con mercados globales.',
-    video: null
-  },
-  'Sebastian Sanchez': {
-    role: 'CEO KS-NX',
-    tagline: 'Construyendo el futuro inmobiliario de Uruguay desde la arquitectura y la innovación.',
-    bio: 'Sebastián cofundó Kopel Sánchez y ha sido pieza clave en proyectos inmobiliarios que están cambiando el skyline de Montevideo. Su visión combina arquitectura, negocios e innovación, y ahora lidera la apuesta del estudio por integrar IA en todos sus procesos. Demuestra que la construcción del futuro empieza desde el tablero de diseño.',
-    company_desc: 'KS-NX es la unidad de innovación y tecnología de Kopel Sánchez, enfocada en transformación digital del sector inmobiliario.',
-    video: '1HpynHYpHrpEa6lGNXxfkTLjeiVQoSKnF'
-  },
-  'Gonzalo Pittaluga': {
-    role: 'Director Pittaluga KS Contable',
-    tagline: 'Transformando la contabilidad en una herramienta estratégica para los negocios.',
-    bio: 'Gonzalo dirige el estudio contable de Kopel Sánchez con una visión que trasciende los números. Como socio de KS, integra la gestión financiera con la estrategia de negocios, ayudando a las empresas a tomar decisiones informadas basadas en datos. Su enfoque moderno de la contabilidad demuestra que las finanzas pueden ser motor de innovación.',
-    company_desc: 'Pittaluga KS Contable es el estudio contable del grupo Kopel Sánchez, especializado en asesoramiento financiero estratégico.',
-    video: null
-  },
-  'Martin Eurnekian': {
-    role: 'CEO Corporación América',
-    tagline: 'Conectando continentes desde los aeropuertos hasta los campos.',
-    bio: 'Martín lidera Corporación América, un holding multinacional que opera aeropuertos, medios y agronegocios en múltiples países. Con una visión que cruza industrias y fronteras, gestiona infraestructura crítica que conecta millones de personas cada año. Su liderazgo demuestra que la escala y la innovación pueden convivir en las industrias más tradicionales.',
-    company_desc: 'Corporación América es un holding multinacional que opera aeropuertos internacionales, medios de comunicación y agronegocios.',
-    video: null
-  },
-  'Martin Dovat': {
-    role: 'Director Zonamerica',
-    tagline: 'Construyendo el ecosistema empresarial más innovador de Uruguay.',
-    bio: 'Martín dirige Zonamerica, el parque empresarial que transformó la forma de hacer negocios en Uruguay. Bajo su liderazgo, la zona franca evolucionó de polo industrial a ecosistema de innovación, atrayendo a las principales empresas tech del mundo. Su visión demuestra que Uruguay puede ser hub global de talento y tecnología.',
-    company_desc: 'Zonamerica es el principal parque de negocios y tecnología de Uruguay.',
-    video: '1sbs4qfoEgdCQ0FhQPLIaoRJVNHqusHJr'
-  },
-  'Orlando Dovat': {
-    role: 'Fundador Zonamerica',
-    tagline: 'El visionario que creó el Silicon Valley uruguayo.',
-    bio: 'Orlando fundó Zonamerica cuando pocos creían que Uruguay podía ser destino de empresas tecnológicas globales. Su visión transformó 94 hectáreas en el ecosistema empresarial más importante del país, atrayendo a gigantes como Globant, dLocal y Despegar. Es el arquitecto del sueño tech uruguayo — y su legado inspira a toda una generación de emprendedores.',
-    company_desc: 'Zonamerica es el principal parque de negocios y tecnología de Uruguay, fundado en 1990.',
-    video: null
-  },
-  'Juan Manuel Parada': {
-    role: 'CEO Tienda Inglesa',
-    tagline: 'Reinventando el retail uruguayo con visión de futuro.',
-    bio: 'Juan Manuel lidera Tienda Inglesa, la cadena de retail más icónica de Uruguay. Su gestión ha transformado la experiencia de compra uruguaya, combinando tradición con innovación tecnológica. Ahora explora cómo la IA puede revolucionar desde la cadena de suministro hasta la experiencia del cliente, demostrando que el retail del futuro se construye hoy.',
-    company_desc: 'Tienda Inglesa es la cadena de supermercados premium líder en Uruguay.',
-    video: null
-  },
-  'Joaquin Cabrera': {
-    role: 'CEO Ciemsa CSI Ingeniería',
-    tagline: 'Ingeniería de clase mundial con raíces uruguayas.',
-    bio: 'Joaquín lidera Ciemsa CSI Ingeniería con la convicción de que la ingeniería uruguaya puede competir con los mejores del mundo. Su empresa entrega proyectos de alta complejidad combinando rigor técnico con innovación tecnológica. Bajo su dirección, la firma se posiciona como referente en ingeniería aplicada a la industria y la infraestructura.',
-    company_desc: 'Ciemsa CSI Ingeniería es una empresa uruguaya líder en servicios de ingeniería industrial e infraestructura.',
-    video: null
-  },
-  'Agustin Tafernaberry': {
-    role: 'CEO Itaú Uruguay',
-    tagline: 'Transformando la banca en Uruguay con innovación y escala latinoamericana.',
-    bio: 'Agustín dirige Itaú Uruguay, la filial local del banco más grande de América Latina. Su liderazgo combina la potencia de una institución financiera global con la agilidad necesaria para innovar en el mercado uruguayo. Bajo su gestión, Itaú se posiciona como referente en banca digital y transformación financiera en el país.',
-    company_desc: 'Itaú Uruguay es la operación local del mayor banco privado de América Latina.',
-    video: null
-  },
-  'Andres Packziarz': {
-    role: 'Director Joacamar-Xion',
-    tagline: 'Conectando tecnología con los sectores más tradicionales de la economía.',
-    bio: 'Andrés dirige el grupo Joacamar, que opera Xion, uno de los referentes en distribución y retail especializado. Su visión empresarial conecta sectores tradicionales con las últimas tendencias tecnológicas, buscando constantemente formas de innovar en industrias establecidas. Representa la nueva generación de empresarios que entiende que la transformación digital no es opcional.',
-    company_desc: 'Joacamar es un grupo empresarial uruguayo que opera marcas de retail y distribución, incluyendo Xion.',
-    video: null
-  },
-  'Natty Manhard': {
-    role: 'Directora Chic Parisien',
-    tagline: 'Llevando la moda uruguaya a nuevos horizontes con visión empresarial.',
-    bio: 'Natty lidera Chic Parisien, una de las cadenas de moda más reconocidas de Uruguay. Su gestión ha modernizado la marca combinando tradición con una visión empresarial actual. Ahora explora cómo la IA puede transformar desde la logística hasta la experiencia de compra, demostrando que la moda y la tecnología son aliadas naturales.',
-    company_desc: 'Chic Parisien es una cadena de tiendas de moda y accesorios con presencia en todo Uruguay.',
-    video: null
-  },
-  'Diego Forlán': {
-    role: 'Fundador DFC Club Deportivo',
-    tagline: 'Del Balón de Oro al mundo de los negocios — los campeones no se retiran, se transforman.',
-    bio: 'Levantó el Balón de Oro en el Mundial 2010 con una gambeta que detuvo el tiempo. Hoy, con la misma pasión con la que gambeteaba defensas, Forlán construye su emprendimiento deportivo DFC Club, demostrando que los grandes campeones no se retiran — se transforman. Su visión une deporte, tecnología y emprendimiento en un proyecto que inspira a toda una generación.',
-    company_desc: 'DFC Club Deportivo es el emprendimiento deportivo fundado por Diego Forlán, enfocado en formación y desarrollo deportivo.',
-    video: null
-  },
-  'Alejandro Gerwer': {
-    role: 'Director Casa Jorge Importación',
-    tagline: 'Tradición importadora con mentalidad de innovación.',
-    bio: 'Alejandro dirige Casa Jorge, una empresa con décadas de historia en el comercio de importación uruguayo. Su liderazgo combina la solidez de una empresa tradicional con una mentalidad abierta a la innovación y la transformación digital. En un mundo que cambia a velocidad IA, Alejandro demuestra que las empresas con historia también pueden liderar el futuro.',
-    company_desc: 'Casa Jorge es una de las empresas importadoras más tradicionales y reconocidas de Uruguay.',
-    video: null
-  },
-  'Pipe Stein': {
-    role: 'Director Notable Publicidad',
-    tagline: 'Creatividad que trasciende los formatos — de la publicidad tradicional a la IA generativa.',
-    bio: 'Pipe cofundó Notable y la convirtió en una de las agencias más innovadoras de Uruguay. Su trabajo combina creatividad publicitaria con las últimas herramientas tecnológicas, incluyendo IA generativa para producción audiovisual. Demuestra que la publicidad del futuro no reemplaza la creatividad humana — la potencia.',
-    company_desc: 'Notable Publicidad es una agencia creativa uruguaya que combina publicidad tradicional con tecnología de vanguardia.',
-    video: null
-  },
-  'Diego Lev': {
-    role: 'Co-Director Notable Publicidad',
-    tagline: 'Donde otros ven anuncios, él ve experiencias que cambian percepciones.',
-    bio: 'Diego codirige Notable junto a Pipe Stein, aportando una visión única que une narrativa, tecnología y estrategia. Su trabajo ha redefinido lo que es posible en publicidad uruguaya, utilizando IA y nuevas tecnologías para crear experiencias que van más allá del spot tradicional. Desde Montevideo, demuestra que la creatividad no tiene fronteras.',
-    company_desc: 'Notable Publicidad es una agencia creativa uruguaya que combina publicidad tradicional con tecnología de vanguardia.',
-    video: null
-  },
-  'Mati Wolosky': {
-    role: 'Emprendedor Tech',
-    tagline: 'Serial entrepreneur que construye el futuro tech de Uruguay.',
-    bio: 'Matías es un emprendedor serial que ha fundado y liderado múltiples empresas tecnológicas. Su energía y visión han contribuido a posicionar a Uruguay como hub de innovación en la región. Conecta ecosistemas, inspira founders y demuestra que desde un país chico se pueden construir empresas de impacto global.',
-    company_desc: 'Emprendedor tech serial con múltiples ventures en el ecosistema tecnológico uruguayo.',
-    video: null
-  },
-  'Sergio Fogel': {
-    role: 'Cofundador dLocal',
-    tagline: 'Cofundó el primer unicornio uruguayo y lo llevó a NASDAQ.',
-    bio: 'Sergio cofundó dLocal y escribió una de las páginas más importantes de la historia tech de Uruguay: el primer unicornio del país, listado en NASDAQ en 2021. Su visión de conectar pagos globales con mercados emergentes creó una empresa que procesa miles de millones de dólares al año. Demostró al mundo que desde Montevideo se puede construir una fintech de clase mundial.',
-    company_desc: 'dLocal es la plataforma de pagos transfronterizos fundada en Uruguay, listada en NASDAQ desde 2021.',
-    video: null
-  },
-  'Hernan Kazah': {
-    role: 'Cofundador Kaszek Ventures',
-    tagline: 'De VP de MercadoLibre a construir el VC más grande de LatAm.',
-    bio: 'Hernán fue VP de MercadoLibre en los años en que la empresa pasó de startup a gigante continental. Con esa experiencia única, cofundó Kaszek Ventures y lo convirtió en el fondo de venture capital más grande e influyente de América Latina, respaldando a los próximos unicornios de la región. Su ojo para detectar founders extraordinarios ha dado forma al ecosistema tech de todo un continente.',
-    company_desc: 'Kaszek Ventures es el fondo de venture capital más grande de América Latina.',
-    video: null
-  },
-  'Guibert Englebienne': {
-    role: 'CTO y Cofundador Globant',
-    tagline: 'Cofundó Globant y la convirtió en la empresa tech más grande de Argentina.',
-    bio: 'Guibert cofundó Globant en un café de Buenos Aires y la transformó en una empresa de más de 25,000 empleados, listada en NYSE. Como CTO, define la visión tecnológica de una de las empresas más innovadoras del mundo, liderando la adopción de IA a escala empresarial. Su amistad con Fabián Kopel fue el catalizador que hizo posible este foro.',
-    company_desc: 'Globant es una empresa nativa digital con +25,000 empleados, listada en NYSE.',
-    video: null
-  },
-  'Martin Migoya': {
-    role: 'CEO y Cofundador Globant',
-    tagline: 'De una startup en Buenos Aires a liderar una empresa global con +25,000 empleados.',
-    bio: 'Martín cofundó Globant y la llevó de startup a empresa global listada en NYSE con más de 25,000 empleados en todo el mundo. Su liderazgo ha sido fundamental para posicionar a Latinoamérica como polo de talento tecnológico mundial. Desde Buenos Aires hasta Wall Street — Martín demuestra que los sueños grandes necesitan ejecución implacable.',
-    company_desc: 'Globant es una empresa nativa digital con +25,000 empleados, listada en NYSE.',
-    video: null
-  },
-  'Martin Delosantos': {
-    role: 'CFO MercadoLibre',
-    tagline: 'Las finanzas detrás del gigante del ecommerce latinoamericano.',
-    bio: 'Martín es el CFO de MercadoLibre, gestionando las finanzas de la empresa tech más valiosa de América Latina. Su expertise financiero es clave para sostener el crecimiento exponencial de un ecosistema que incluye marketplace, fintech y logística. Desde Montevideo, ayuda a dirigir una empresa que procesa miles de millones de dólares al año.',
-    company_desc: 'MercadoLibre es el marketplace y ecosistema de pagos más grande de América Latina.',
-    video: null
-  },
-  'Borja Bergman': {
-    role: 'Emprendedor IA',
-    tagline: 'Data-driven entrepreneur del mundo de las finanzas globales.',
-    bio: 'Borja es emprendedor serial. Fundó una empresa con 25 analistas de datos que le permitió invertir en un conjunto de empresas llevando su fondo a rentabilidades impresionantes para luego ser adquirido por Santander en España. Actualmente es Global Head of Commercial Santander.',
-    company_desc: 'Emprendedor serial y ejecutivo global en Banco Santander.',
-    video: null
-  },
-  'Nico Bergman': {
-    role: 'Emprendedor IA',
-    tagline: 'Experto en seguridad IA y herramientas de productividad.',
-    bio: 'Nico recomienda OpenClaw como herramienta de productividad personal, pero advierte tener mucho cuidado con la seguridad, especialmente para no coders. Sugiere instalarlo con Claude Code para máxima seguridad.',
-    company_desc: 'Emprendedor especializado en IA y seguridad.',
-    video: null
+    video: null,
+    role: 'Especialista en IA · Fenicio', roleEn: 'AI Specialist · Fenicio',
+    desc: 'Cofundador de Fenicio eCommerce. IA aplicada para transformación de negocios y optimización de procesos.',
+    descEn: 'Co-founder of Fenicio eCommerce. Applied AI for business transformation and process optimization.'
   }
 };
 
-function openVideoModal(name) {
-  const data = speakerData[name];
+function openVideoModal(speakerName) {
+  const data = speakerData[speakerName];
   if (!data) return;
+
   const modal = document.getElementById('videoModal');
-  document.getElementById('modalTitle').textContent = name;
-  document.getElementById('modalRole').textContent = data.role;
-  document.getElementById('modalTagline').textContent = data.tagline;
-  document.getElementById('modalBio').textContent = data.bio;
-  document.getElementById('modalCompany').textContent = data.company_desc;
-  const vid = document.getElementById('modalVideo');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalRole = document.getElementById('modalRole');
+  const modalBio = document.getElementById('modalBio');
+  const modalVideo = document.getElementById('modalVideo');
+
+  modalTitle.textContent = speakerName;
+  modalRole.textContent = currentLang === 'es' ? data.role : (data.roleEn || data.role);
+  modalBio.textContent = currentLang === 'es' ? data.desc : (data.descEn || data.desc);
+
   if (data.video) {
-    vid.src = 'https://drive.google.com/file/d/' + data.video + '/preview';
-    vid.style.display = 'block';
+    modalVideo.src = `https://drive.google.com/file/d/${data.video}/preview`;
+    modalVideo.style.display = 'block';
   } else {
-    vid.src = '';
-    vid.style.display = 'none';
+    modalVideo.style.display = 'none';
   }
+
   modal.classList.add('active');
 }
 
 function closeVideoModal() {
-  const modal = document.getElementById('videoModal');
-  modal.classList.remove('active');
-  const vid = document.getElementById('modalVideo');
-  vid.src = '';
+  document.getElementById('videoModal').classList.remove('active');
+  document.getElementById('modalVideo').src = '';
 }
 
-document.getElementById('videoModal').addEventListener('click', function(e) {
-  if (e.target === this) closeVideoModal();
+document.getElementById('videoModal').addEventListener('click', (e) => {
+  if (e.target.id === 'videoModal') {
+    closeVideoModal();
+  }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  // CEOs
-  document.querySelectorAll('#companies .card').forEach(card => {
-    const nameEl = card.querySelector('h4');
-    if (!nameEl) return;
-    const name = nameEl.textContent;
-    if (speakerData[name]) {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', () => openVideoModal(name));
-    }
-  });
+// Add click listeners to ALL speaker agenda items
+document.querySelectorAll('.agenda-item').forEach(item => {
+  const nameEl = item.querySelector('.ag-name');
+  if (!nameEl) return;
+  const name = nameEl.textContent || nameEl.getAttribute('data-es') || '';
+  // Skip non-speaker items
+  if (['Bienvenida', 'Welcome', 'Apertura', 'Opening', 'Mesa Redonda', 'CEO &', 'CEO y'].some(skip => name.includes(skip))) return;
+  if (speakerData[name]) {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => openVideoModal(name));
+  }
+});
 
-  // Ecosystem Leaders
-  document.querySelectorAll('.leader-chip').forEach(chip => {
-    const nameEl = chip.querySelector('.name');
-    if (!nameEl) return;
-    const name = nameEl.textContent;
-    if (speakerData[name]) {
-      chip.style.cursor = 'pointer';
-      chip.addEventListener('click', () => openVideoModal(name));
-    }
-  });
+// FORUM POST
+function addPost() {
+  const textarea = document.getElementById('forumText');
+  const text = textarea.value.trim();
+  if (!text) return;
 
-  // Experts
-  document.querySelectorAll('#experts .card').forEach(card => {
-    const nameEl = card.querySelector('h4');
-    if (!nameEl) return;
-    const name = nameEl.textContent;
-    if (speakerData[name]) {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', () => openVideoModal(name));
+  const posts = document.getElementById('forumPosts');
+  const post = document.createElement('div');
+  post.className = 'forum-post';
+
+  // Detect URLs
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const bodyHtml = text.replace(urlRegex, '<a href="$1" class="post-url" target="_blank">🔗 $1</a>');
+
+  post.innerHTML = `
+    <div class="post-header">
+      <div class="post-avatar">TU</div>
+      <div><span class="post-name">Participante</span> <span class="post-company">· Forum</span></div>
+      <span class="post-time">ahora</span>
+    </div>
+    <div class="post-body">${bodyHtml}</div>
+  `;
+  posts.insertBefore(post, posts.firstChild);
+  textarea.value = '';
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
