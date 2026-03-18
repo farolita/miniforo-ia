@@ -78,32 +78,6 @@
   .modal-bio { color: #ccc; font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; }
   .modal-company { color: #aaa; font-size: 0.85rem; background: #0d1225; border: 1px solid #1e2740; border-radius: 8px; padding: 10px; }
 
-  /* PHOTOS CAROUSEL */
-  #photos { padding: 80px 40px; background: #0d1225; }
-  #photos h2 { text-align: center; }
-  .carousel-container { position: relative; overflow: hidden; border-radius: 12px; background: #111827; max-width: 1200px; margin: 0 auto; }
-  .carousel-track { display: flex; gap: 12px; padding: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
-  .carousel-track::-webkit-scrollbar { display: none; }
-  .carousel-track img { width: 400px; height: 280px; object-fit: cover; border-radius: 8px; scroll-snap-align: start; flex-shrink: 0; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
-  .carousel-track img:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(33,150,243,0.3); }
-  .carousel-nav { display: flex; justify-content: center; gap: 8px; padding: 12px; }
-  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; cursor: pointer; transition: background 0.2s; }
-  .carousel-dot.active { background: #2196F3; }
-  .carousel-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 10px; pointer-events: none; z-index: 2; }
-  .carousel-arrows button { pointer-events: all; background: rgba(0,0,0,0.6); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: background 0.2s; }
-  .carousel-arrows button:hover { background: rgba(33,150,243,0.6); }
-
-  /* LIGHTBOX */
-  .lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; align-items: center; justify-content: center; }
-  .lightbox-overlay.active { display: flex; }
-  .lightbox-overlay img { max-width: 90vw; max-height: 90vh; border-radius: 12px; object-fit: contain; }
-  .lightbox-close { position: absolute; top: 20px; right: 30px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; z-index: 2001; }
-  .lightbox-close:hover { color: #2196F3; }
-  .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: none; color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; transition: background 0.2s; }
-  .lightbox-nav:hover { background: rgba(33,150,243,0.5); }
-  .lightbox-prev { left: 20px; }
-  .lightbox-next { right: 20px; }
-
   /* FORUM */
   #forum { padding: 80px 40px; background: #0a0e1a; }
   #forum h2 { text-align: center; margin-bottom: 48px; }
@@ -139,7 +113,6 @@
     <a href="#experts">Agenda</a>
     <a href="#companies">CEOs</a>
     <a href="#leaders">Ecosystem</a>
-    <a href="#photos">Photos</a>
     <a href="#forum" class="new-tag">Forum</a>
   </div>
   <button class="lang-btn">ES</button>
@@ -323,36 +296,6 @@
     </div>
   </div>
 </section>
-
-<section id="photos">
-  <h2>Fotos del Evento</h2>
-  <p class="section-subtitle" style="text-align:center;">Momentos destacados del Foro.</p>
-  <div class="carousel-container">
-    <div class="carousel-arrows">
-      <button onclick="scrollCarousel(-1)">◀</button>
-      <button onclick="scrollCarousel(1)">▶</button>
-    </div>
-    <div class="carousel-track" id="carouselTrack">
-      <img src="https://lh3.googleusercontent.com/d/1ojTws69-ETOnslC6N1WoxnFHaohZopGv=s800" alt="Foto evento 1" onclick="openLightbox(0)">
-      <img src="https://lh3.googleusercontent.com/d/1oJ7x9aMXnF8KIX8y7uhWEs9xs1sDfPEa=s800" alt="Foto evento 2" onclick="openLightbox(1)">
-      <img src="https://lh3.googleusercontent.com/d/1-pCzf0pwdgK3PvajilDY_qPg4-Eco9Ng=s800" alt="Foto evento 3" onclick="openLightbox(2)">
-      <img src="https://lh3.googleusercontent.com/d/1Uec9I6Gk3e9qZOeLiI14GzfQ3kU8zMia=s800" alt="Foto evento 4" onclick="openLightbox(3)">
-      <img src="https://lh3.googleusercontent.com/d/1fCt-LPxEaRujUV5EdmQPBm3tpom3aDd5=s800" alt="Foto evento 5" onclick="openLightbox(4)">
-      <img src="https://lh3.googleusercontent.com/d/1Sg9uPhXV8LYZzMBrmtbhu8NkdhA1wLgS=s800" alt="Foto evento 6" onclick="openLightbox(5)">
-      <img src="https://lh3.googleusercontent.com/d/1xOqispo6ZcTRgXkEkFiaqhMGWVhcCaZj=s800" alt="Foto evento 7" onclick="openLightbox(6)">
-      <img src="https://lh3.googleusercontent.com/d/1qsbjW4O7YmzXygo_tnwu4rs-fa1KtCr8=s800" alt="Mesa del foro" onclick="openLightbox(7)">
-    </div>
-    <div class="carousel-nav" id="carouselNav"></div>
-  </div>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox-overlay" id="lightbox" onclick="if(event.target===this)closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-nav lightbox-prev" onclick="changeLightbox(-1)">◀</button>
-  <img id="lightboxImg" src="" alt="Foto ampliada">
-  <button class="lightbox-nav lightbox-next" onclick="changeLightbox(1)">▶</button>
-</div>
 
 <section id="forum">
   <h2>Community Forum</h2>
@@ -677,60 +620,6 @@ function closeVideoModal() {
 
 document.getElementById('videoModal').addEventListener('click', function(e) {
   if (e.target === this) closeVideoModal();
-});
-
-// CAROUSEL
-function scrollCarousel(dir) {
-  const track = document.getElementById('carouselTrack');
-  track.scrollBy({ left: dir * 412, behavior: 'smooth' });
-}
-
-// CAROUSEL DOTS
-(function initCarousel() {
-  const track = document.getElementById('carouselTrack');
-  const nav = document.getElementById('carouselNav');
-  if (!track || !nav) return;
-  const items = track.querySelectorAll('img');
-  items.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.onclick = () => track.scrollTo({ left: i * 412, behavior: 'smooth' });
-    nav.appendChild(dot);
-  });
-  track.addEventListener('scroll', () => {
-    const idx = Math.round(track.scrollLeft / 412);
-    nav.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
-  });
-})();
-
-// LIGHTBOX
-const lightboxPhotos = Array.from(document.querySelectorAll('#carouselTrack img')).map(img => img.src.replace('=s800', '=s1600'));
-let currentLightbox = 0;
-
-function openLightbox(idx) {
-  currentLightbox = idx;
-  document.getElementById('lightboxImg').src = lightboxPhotos[idx];
-  document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-  document.getElementById('lightboxImg').src = '';
-  document.body.style.overflow = '';
-}
-
-function changeLightbox(dir) {
-  currentLightbox = (currentLightbox + dir + lightboxPhotos.length) % lightboxPhotos.length;
-  document.getElementById('lightboxImg').src = lightboxPhotos[currentLightbox];
-}
-
-// Keyboard navigation for lightbox
-document.addEventListener('keydown', function(e) {
-  if (!document.getElementById('lightbox').classList.contains('active')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') changeLightbox(-1);
-  if (e.key === 'ArrowRight') changeLightbox(1);
 });
 
 document.addEventListener('DOMContentLoaded', function() {
