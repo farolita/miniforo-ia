@@ -48,7 +48,7 @@
   /* FORUM AGENDA */
   .agenda-item { display: flex; gap: 16px; background: #111827; border-radius: 12px; padding: 16px; margin-bottom: 14px; align-items: center; border-left: 3px solid #2196F3; transition: transform 0.2s; cursor: pointer; }
   .agenda-item:hover { transform: translateX(4px); }
-  .agenda-img { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: linear-gradient(135deg, #1a2040, #0d1225); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .agenda-img { width: 100px; height: 100px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: linear-gradient(135deg, #1a2040, #0d1225); display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .agenda-img img { width: 100%; height: 100%; object-fit: cover; }
   .agenda-content .ag-time { color: #2196F3; font-size: 0.75rem; font-weight: 600; }
   .agenda-content .ag-name { font-size: 1rem; font-weight: 700; color: #fff; }
@@ -62,6 +62,7 @@
   .carousel-track { display: flex; gap: 12px; padding: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
   .carousel-track::-webkit-scrollbar { display: none; }
   .carousel-track .photo-item { width: 300px; height: 200px; object-fit: cover; border-radius: 8px; scroll-snap-align: start; flex-shrink: 0; background: linear-gradient(135deg, #1a2040, #0d1225, #1a3050); display: flex; align-items: center; justify-content: center; color: #444; font-size: 0.8rem; }
+  .carousel-track .photo-item img { width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
   .carousel-nav { display: flex; justify-content: center; gap: 8px; padding: 12px; }
   .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; cursor: pointer; transition: background 0.2s; }
   .carousel-dot.active { background: #2196F3; }
@@ -75,6 +76,7 @@
   .card:hover { transform: translateY(-4px); }
   .card-img { height: 180px; background: linear-gradient(135deg, #1a2040, #0d1225); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
   .card-img .initials { font-size: 2.5rem; font-weight: 800; color: rgba(33,150,243,0.3); }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; }
   .card-body { padding: 14px; }
   .card-body h4 { color: #fff; font-size: 0.95rem; }
   .card-body .role { color: #888; font-size: 0.78rem; }
@@ -137,6 +139,17 @@
   .quote-special p { color: #ddd; font-size: 0.88rem; }
   .quote-special strong { color: #f59e0b; }
 
+  /* VIDEO MODAL */
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
+  .modal-overlay.active { display: flex; }
+  .modal-content { background: #111827; border-radius: 12px; padding: 24px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; border: 1px solid #1e2740; position: relative; }
+  .modal-close { position: absolute; top: 16px; right: 16px; background: #1e2740; border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .modal-close:hover { background: #2196F3; }
+  .modal-video { width: 100%; height: 400px; border-radius: 8px; margin-bottom: 16px; }
+  .modal-title { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+  .modal-role { color: #2196F3; font-size: 0.9rem; margin-bottom: 12px; }
+  .modal-bio { color: #ccc; font-size: 0.88rem; line-height: 1.5; }
+
   /* FOOTER */
   footer { text-align: center; padding: 30px; border-top: 1px solid #1e2740; color: #666; font-size: 0.8rem; }
   footer strong span { color: #2196F3; }
@@ -165,55 +178,55 @@
 <nav>
   <div class="logo">Foro<span>IA</span></div>
   <div class="nav-links">
-    <a href="#format">Format</a>
-    <a href="#agenda">Agenda</a>
-    <a href="#photos">Photos</a>
-    <a href="#companies">Companies</a>
-    <a href="#foro" class="new-tag" style="margin-right: 20px;">Foro</a>
-    <a href="#toolbox" class="new-tag" style="margin-right: 20px;">ToolBox</a>
-    <a href="#faq">FAQ</a>
+    <a href="#format" data-en="Format" data-es="Formato">Formato</a>
+    <a href="#agenda" data-en="Agenda" data-es="Agenda">Agenda</a>
+    <a href="#photos" data-en="Photos" data-es="Fotos">Fotos</a>
+    <a href="#companies" data-en="Companies" data-es="Empresas">Empresas</a>
+    <a href="#foro" class="new-tag" style="margin-right: 20px;" data-en="Forum" data-es="Foro">Foro</a>
+    <a href="#toolbox" class="new-tag" style="margin-right: 20px;" data-en="ToolBox" data-es="ToolBox">ToolBox</a>
+    <a href="#faq" data-en="FAQ" data-es="FAQ">FAQ</a>
   </div>
-  <button class="lang-btn" onclick="toggleLang()">ES</button>
+  <button class="lang-btn" onclick="toggleLang()">EN</button>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">URUGUAY · TECH & BUSINESS</div>
-  <h1>Uruguay talks about<br><span>Artificial Intelligence</span></h1>
-  <p>Business and tech leaders gather at Fabian Kopel's Mini AI Forum to explore how AI is transforming industries.</p>
+  <div class="hero-badge" data-en="URUGUAY · TECH & BUSINESS" data-es="URUGUAY · TECH & BUSINESS">URUGUAY · TECH & BUSINESS</div>
+  <h1 data-en="Uruguay talks about&lt;br&gt;&lt;span&gt;Artificial Intelligence&lt;/span&gt;" data-es="Uruguay habla sobre&lt;br&gt;&lt;span&gt;Inteligencia Artificial&lt;/span&gt;">Uruguay habla sobre<br><span>Inteligencia Artificial</span></h1>
+  <p data-en="Business and tech leaders gather at Fabian Kopel's Mini AI Forum to explore how AI is transforming industries." data-es="Líderes empresariales y tecnológicos se reúnen en el Mini Foro de IA de Fabián Kopel para explorar cómo la IA está transformando las industrias.">Líderes empresariales y tecnológicos se reúnen en el Mini Foro de IA de Fabián Kopel para explorar cómo la IA está transformando las industrias.</p>
   <div class="hero-meta">
     <span>📍 Montevideo, Uruguay</span>
     <span>📅 2026</span>
-    <span>👥 32 participants</span>
+    <span>👥 32 participantes</span>
   </div>
 </div>
 
 <!-- HOW THE DAY UNFOLDS — TIMELINE VERTICAL -->
 <section id="format">
-  <div class="section-label">EVENT FORMAT</div>
-  <h2>How the Day Unfolds</h2>
-  <p class="subtitle">An intimate, dynamic, and informal gathering — designed to spark real conversation.</p>
+  <div class="section-label" data-en="EVENT FORMAT" data-es="FORMATO DEL EVENTO">FORMATO DEL EVENTO</div>
+  <h2 data-en="How the Day Unfolds" data-es="Cómo es la Dinámica">Cómo es la Dinámica</h2>
+  <p class="subtitle" data-en="An intimate, dynamic, and informal gathering — designed to spark real conversation." data-es="Una reunión íntima, dinámica e informal diseñada para generar conversaciones reales.">Una reunión íntima, dinámica e informal diseñada para generar conversaciones reales.</p>
 
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-time">11:00 – 11:20</div>
-      <div class="tl-title">👥 Welcome & Introductions</div>
-      <div class="tl-desc">Participants introduce themselves with their company and role. Conducted via deck. Coffee from the very start.</div>
+      <div class="tl-title" data-en="👥 Welcome & Introductions" data-es="👥 Bienvenida e Introducciones">👥 Bienvenida e Introducciones</div>
+      <div class="tl-desc" data-en="Participants introduce themselves with their company and role. Conducted via deck. Coffee from the very start." data-es="Los participantes se presentan con su empresa y rol. Conducido mediante presentación. Café desde el inicio.">Los participantes se presentan con su empresa y rol. Conducido mediante presentación. Café desde el inicio.</div>
     </div>
     <div class="tl-item">
       <div class="tl-time">11:20 – 12:50</div>
-      <div class="tl-title">🔧 Expert Roundtable</div>
-      <div class="tl-desc">10 presentations of 10 minutes each. Each expert shares their vision of AI in their industry. Moderator: Fabián Kopel.</div>
+      <div class="tl-title" data-en="🔧 Expert Roundtable" data-es="🔧 Mesa Redonda de Expertos">🔧 Mesa Redonda de Expertos</div>
+      <div class="tl-desc" data-en="10 presentations of 10 minutes each. Each expert shares their vision of AI in their industry. Moderator: Fabián Kopel." data-es="10 presentaciones de 10 minutos cada una. Cada experto comparte su visión de IA en su industria. Moderador: Fabián Kopel.">10 presentaciones de 10 minutos cada una. Cada experto comparte su visión de IA en su industria. Moderador: Fabián Kopel.</div>
     </div>
     <div class="tl-item">
       <div class="tl-time">12:50 – 14:30</div>
-      <div class="tl-title">🏢 CEO Roundtable</div>
-      <div class="tl-desc">Each executive presents their pain points in 3 minutes. 10-min blocks with direct exchange with experts. Light food served at 12:50, salads & asado at 13:30.</div>
+      <div class="tl-title" data-en="🏢 CEO Roundtable" data-es="🏢 Mesa Redonda de CEOs">🏢 Mesa Redonda de CEOs</div>
+      <div class="tl-desc" data-en="Each executive presents their pain points in 3 minutes. 10-min blocks with direct exchange with experts. Light food served at 12:50, salads & asado at 13:30." data-es="Cada ejecutivo presenta sus desafíos en 3 minutos. Bloques de 10 min con intercambio directo con expertos. Comida ligera a las 12:50, ensaladas y asado a las 13:30.">Cada ejecutivo presenta sus desafíos en 3 minutos. Bloques de 10 min con intercambio directo con expertos. Comida ligera a las 12:50, ensaladas y asado a las 13:30.</div>
     </div>
     <div class="tl-item">
-      <div class="tl-time" style="color: #10b981;">14:30 onwards</div>
-      <div class="tl-title">🤝 Open Networking</div>
-      <div class="tl-desc">The entire afternoon available to talk with experts, exchange ideas, and schedule future meetings. No clock, no protocol.</div>
+      <div class="tl-time" style="color: #10b981;">14:30 en adelante</div>
+      <div class="tl-title" data-en="🤝 Open Networking" data-es="🤝 Networking Abierto">🤝 Networking Abierto</div>
+      <div class="tl-desc" data-en="The entire afternoon available to talk with experts, exchange ideas, and schedule future meetings. No clock, no protocol." data-es="Toda la tarde disponible para hablar con expertos, intercambiar ideas y agendar reuniones futuras. Sin reloj, sin protocolo.">Toda la tarde disponible para hablar con expertos, intercambiar ideas y agendar reuniones futuras. Sin reloj, sin protocolo.</div>
     </div>
   </div>
 </section>
@@ -222,16 +235,16 @@
 
 <!-- FORUM AGENDA -->
 <section id="agenda">
-  <div class="section-label">PROGRAM</div>
-  <h2>Forum Agenda</h2>
-  <p class="subtitle">Times confirmed in Uruguay time. Click on each speaker to see their story and video.</p>
+  <div class="section-label" data-en="PROGRAM" data-es="PROGRAMA">PROGRAMA</div>
+  <h2 data-en="Forum Agenda" data-es="Agenda del Foro">Agenda del Foro</h2>
+  <p class="subtitle" data-en="Times confirmed in Uruguay time. Click on each speaker to see their story and video." data-es="Horarios confirmados en hora de Uruguay. Haz clic en cada orador para ver su historia y video.">Horarios confirmados en hora de Uruguay. Haz clic en cada orador para ver su historia y video.</p>
 
   <div class="agenda-item">
     <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1qsbjW4O7YmzXygo_tnwu4rs-fa1KtCr8=s400" alt="Mesa"></div>
     <div class="agenda-content">
       <span class="ag-time">11:00 – 11:20</span>
-      <div class="ag-name">Welcome</div>
-      <div class="ag-desc">Introductions — Company & Role (deck)</div>
+      <div class="ag-name" data-en="Welcome" data-es="Bienvenida">Bienvenida</div>
+      <div class="ag-desc" data-en="Introductions — Company & Role (deck)" data-es="Introducciones — Empresa y Rol (presentación)">Introducciones — Empresa y Rol (presentación)</div>
     </div>
   </div>
 
@@ -239,12 +252,12 @@
     <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1qsbjW4O7YmzXygo_tnwu4rs-fa1KtCr8=s400" alt="Mesa"></div>
     <div class="agenda-content">
       <span class="ag-time">11:20 – 11:30</span>
-      <div class="ag-name">Opening</div>
-      <div class="ag-desc">Moderator: Fabián Kopel · Overview of scope and objectives (10 min)</div>
+      <div class="ag-name" data-en="Opening" data-es="Apertura">Apertura</div>
+      <div class="ag-desc" data-en="Moderator: Fabián Kopel · Overview of scope and objectives (10 min)" data-es="Moderador: Fabián Kopel · Descripción general del alcance y objetivos (10 min)">Moderador: Fabián Kopel · Descripción general del alcance y objetivos (10 min)</div>
     </div>
   </div>
 
-  <div class="agenda-item">
+  <div class="agenda-item" data-video="1F70iq5Zeu2Mp0zhMWW4Wqtujnuf56nhm">
     <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1Lb4dvZpbo6WEKUETNsGVj_yXHJVh9V1p=s400" alt="Nicolas Jodal"></div>
     <div class="agenda-content">
       <span class="ag-time">11:30 – 11:40</span> <span class="badge-tag">con Gisella Bertelli</span>
@@ -254,7 +267,7 @@
     </div>
   </div>
 
-  <div class="agenda-item">
+  <div class="agenda-item" data-video="1JGe3Wm7yCmmfz-INdTN2Qryp6vsnO3f6">
     <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1dvLyV6XXyKTgQ6P3m7xR9U2DW4Lgdeos=s400" alt="Ariel Lipchutz"></div>
     <div class="agenda-content">
       <span class="ag-time">11:40 – 11:50</span> <span class="badge-tag">Invitado especial Bs As</span>
@@ -265,7 +278,7 @@
     </div>
   </div>
 
-  <div class="agenda-item">
+  <div class="agenda-item" data-video="1HqNogE9Z49esqOovnnCmKaPPYD55vZy0">
     <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1ImOIODx9aD2N6jmtzMpDg7AzP2Lklurg=s400" alt="Andres Bzurovski"></div>
     <div class="agenda-content">
       <span class="ag-time">11:50 – 12:00</span>
@@ -305,7 +318,7 @@
     </div>
   </div>
 
-  <div class="agenda-item">
+  <div class="agenda-item" data-video="1Me_5OQd7hqTMIewpi65w8_5IkodSxew-">
     <div class="agenda-img"><img src="https://lh3.googleusercontent.com/d/1FEDDxtGjOn3eC_GPSBf2iayDy3nMTYF0=s400" alt="Gaston Milano"></div>
     <div class="agenda-content">
       <span class="ag-time">12:30 – 12:40</span>
@@ -329,8 +342,8 @@
     <div class="agenda-img" style="background: linear-gradient(135deg, #3a2a00, #1a1500);"><img src="https://lh3.googleusercontent.com/d/1qsbjW4O7YmzXygo_tnwu4rs-fa1KtCr8=s400" alt="Mesa"></div>
     <div class="agenda-content">
       <span class="ag-time" style="color:#f59e0b;">12:50 – 14:30</span>
-      <div class="ag-name">CEO & Executive Roundtable</div>
-      <div class="ag-desc">Light food · Direct exchange with experts · Groups of 3</div>
+      <div class="ag-name" data-en="CEO & Executive Roundtable" data-es="Mesa Redonda de CEOs y Ejecutivos">Mesa Redonda de CEOs y Ejecutivos</div>
+      <div class="ag-desc" data-en="Light food · Direct exchange with experts · Groups of 3" data-es="Comida ligera · Intercambio directo con expertos · Grupos de 3">Comida ligera · Intercambio directo con expertos · Grupos de 3</div>
     </div>
   </div>
 </section>
@@ -339,9 +352,9 @@
 
 <!-- EVENT PHOTOS — CAROUSEL -->
 <section id="photos">
-  <div class="section-label">MOMENTS</div>
-  <h2>Event Photos</h2>
-  <p class="subtitle">Highlights from the Forum.</p>
+  <div class="section-label" data-en="MOMENTS" data-es="MOMENTOS">MOMENTOS</div>
+  <h2 data-en="Event Photos" data-es="Fotos del Evento">Fotos del Evento</h2>
+  <p class="subtitle" data-en="Highlights from the Forum." data-es="Momentos destacados del Foro.">Momentos destacados del Foro.</p>
 
   <div class="carousel-container">
     <div class="carousel-arrows">
@@ -365,14 +378,30 @@
 
 <!-- CEOs & EXECUTIVES -->
 <section id="companies">
-  <div class="section-label">COMPANIES</div>
-  <h2>CEOs & Executives</h2>
-  <p class="subtitle">The business leaders joining the conversation.</p>
+  <div class="section-label" data-en="COMPANIES" data-es="EMPRESAS">EMPRESAS</div>
+  <h2 data-en="CEOs & Executives" data-es="CEOs y Directivos">CEOs y Directivos</h2>
+  <p class="subtitle" data-en="The business leaders joining the conversation." data-es="Los líderes empresariales que se unen a la conversación.">Los líderes empresariales que se unen a la conversación.</p>
 
   <div class="cards-grid">
     <div class="card">
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1VRMpPmw6twrtdpxvwDcgF7uFoxTF_tTA=s400" alt="Sebastian Sanchez" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Sebastian Sanchez</h4><span class="role">CEO</span><br><span class="company">KS-NX</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1lCJzTZHPDX3qAv8AmZ0b5i-n5BPQX5t-=s400" alt="Gonzalo Pittaluga" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Gonzalo Pittaluga</h4><span class="role">Director</span><br><span class="company">Pittaluga KS Contable</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1YuTEeRReeTUrjCVhr3pkyCBMZdPD5IJn=s400" alt="Martin Eurnekian" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Martin Eurnekian</h4><span class="role">CEO</span><br><span class="company">Corporación América</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1-IeAwNhinT5fsZOwlWDM_VxWmlClNu7G=s400" alt="Martin Dovat" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Martin Dovat</h4><span class="role">Director</span><br><span class="company">Zonamerica</span></div>
+    </div>
+    <div class="card">
       <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1vXEbny8nh_kAwBgqWePjCLtRCnrUhDtq=s400" alt="Orlando Dovat" style="width:100%; height:100%; object-fit:cover;"></div>
-      <div class="card-body"><h4>Orlando Dovat</h4><span class="role">Founder</span><br><span class="company">Zonamerica</span></div>
+      <div class="card-body"><h4>Orlando Dovat</h4><span class="role">Fundador</span><br><span class="company">Zonamerica</span></div>
     </div>
     <div class="card">
       <div class="card-img"><img src="https://lh3.googleusercontent.com/d/19-eTxyPUms4M0T0Xef7kUxddHY8OQPjQ=s400" alt="Juan Manuel Parada" style="width:100%; height:100%; object-fit:cover;"></div>
@@ -387,20 +416,28 @@
       <div class="card-body"><h4>Agustin Tafernaberry</h4><span class="role">CEO</span><br><span class="company">Itaú Uruguay</span></div>
     </div>
     <div class="card">
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1VPGAKxHCnsBqzAL-NfBt3RE4HgqpYNrx=s400" alt="Andres Packziarz" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Andres Packziarz</h4><span class="role">Director</span><br><span class="company">Joacamar-Xion</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1GeMEbRLnjZbBl_bg99Pq-40ECi5QZ7Ot=s400" alt="Natty Manhard" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Natty Manhard</h4><span class="role">Directora</span><br><span class="company">Chic Parisien</span></div>
+    </div>
+    <div class="card">
       <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1AVPAmu63dvIGBSQ3Nv5Oc07xtYLSLafV=s400" alt="Diego Forlán" style="width:100%; height:100%; object-fit:cover;"></div>
-      <div class="card-body"><h4>Diego Forlán</h4><span class="role">Founder</span><br><span class="company">DFC Club Deportivo</span></div>
+      <div class="card-body"><h4>Diego Forlán</h4><span class="role">Fundador</span><br><span class="company">DFC Club Deportivo</span></div>
     </div>
     <div class="card">
-      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1-IeAwNhinT5fsZOwlWDM_VxWmlClNu7G=s400" alt="Carlos Pellas" style="width:100%; height:100%; object-fit:cover;"></div>
-      <div class="card-body"><h4>Carlos Pellas</h4><span class="role">Chairman</span><br><span class="company">Grupo Pellas</span></div>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/17uubijv7gCMbR7PgptLrGjn8OJFNjUAx=s400" alt="Alejandro Gerwer" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Alejandro Gerwer</h4><span class="role">Director</span><br><span class="company">Casa Jorge Importación</span></div>
     </div>
     <div class="card">
-      <div class="card-img"><span class="initials">MR</span></div>
-      <div class="card-body"><h4>Martin Rastellino</h4><span class="role">Managing Director</span><br><span class="company">Accenture</span></div>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/17PnPscyZ7eXKZvP-V4-cdqJLBYnGmHzo=s400" alt="Pipe Stein" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Pipe Stein</h4><span class="role">Director</span><br><span class="company">Notable Publicidad</span></div>
     </div>
     <div class="card">
-      <div class="card-img"><span class="initials">AF</span></div>
-      <div class="card-body"><h4>Alberto Fernandez</h4><span class="role">COO</span><br><span class="company">ISAP</span></div>
+      <div class="card-img"><img src="https://lh3.googleusercontent.com/d/1DpZBBKhhALE6eyl-tHgF4W_TJX0Sunv2=s400" alt="Diego Lev" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div class="card-body"><h4>Diego Lev</h4><span class="role">Co-Director</span><br><span class="company">Notable Publicidad</span></div>
     </div>
   </div>
 </section>
@@ -409,9 +446,9 @@
 
 <!-- ECOSYSTEM LEADERS -->
 <section>
-  <div class="section-label">COPIED IN</div>
-  <h2>Ecosystem Leaders</h2>
-  <p class="subtitle">Founders and icons of Latin American tech who are part of this conversation.</p>
+  <div class="section-label" data-en="INVITADOS" data-es="INVITADOS">INVITADOS</div>
+  <h2 data-en="Ecosystem Leaders" data-es="Líderes del Ecosistema">Líderes del Ecosistema</h2>
+  <p class="subtitle" data-en="Founders and icons of Latin American tech who are part of this conversation." data-es="Fundadores e íconos del tech latinoamericano que forman parte de esta conversación.">Fundadores e íconos del tech latinoamericano que forman parte de esta conversación.</p>
 
   <div class="leaders-grid">
     <div class="leader-chip">
@@ -445,46 +482,110 @@
 
 <!-- FORO -->
 <section id="foro">
-  <div class="section-label">COMMUNITY</div>
-  <h2>Foro</h2>
-  <p class="subtitle">Espacio abierto para compartir ideas, opiniones y herramientas.</p>
+  <div class="section-label" data-en="COMMUNITY" data-es="COMUNIDAD">COMUNIDAD</div>
+  <h2 data-en="Foro" data-es="Foro">Foro</h2>
+  <p class="subtitle" data-en="Open space to share ideas, opinions and tools." data-es="Espacio abierto para compartir ideas, opiniones y herramientas.">Espacio abierto para compartir ideas, opiniones y herramientas.</p>
 
   <div class="forum-container">
     <div class="forum-input">
       <textarea id="forumText" placeholder="Compartí tu opinión, una herramienta de IA, o un recurso útil..."></textarea>
       <div class="input-actions">
-        <span class="input-hint">💡 Las URLs que compartas se agregan automáticamente al ToolBox</span>
-        <button class="forum-btn" onclick="addPost()">Publicar</button>
+        <span class="input-hint" data-en="💡 URLs you share are automatically added to the ToolBox" data-es="💡 Las URLs que compartas se agregan automáticamente al ToolBox">💡 Las URLs que compartas se agregan automáticamente al ToolBox</span>
+        <button class="forum-btn" onclick="addPost()" data-en="Publish" data-es="Publicar">Publicar</button>
       </div>
     </div>
 
     <div id="forumPosts">
       <div class="forum-post">
         <div class="post-header">
-          <div class="post-avatar">NJ</div>
-          <div><span class="post-name">Nicolas Jodal</span> <span class="post-company">· GeneXus / Globant</span></div>
-          <span class="post-time">hace 2h</span>
+          <div class="post-avatar">FK</div>
+          <div><span class="post-name">Fabián Kopel</span> <span class="post-company">· Organizador</span></div>
+          <span class="post-time">pre-evento</span>
         </div>
-        <div class="post-body">Increíble lo que se puede hacer hoy con agentes de IA para automatizar procesos de desarrollo. Les comparto esta herramienta que estamos probando:</div>
-        <a href="#" class="post-url">🔗 https://ejemplo-herramienta-ia.com</a>
+        <div class="post-body">Los esperamos mañana con ganas de aprender y siempre agradecidos a ustedes que estén en Uruguay, que es increíble que reúna este talento.</div>
       </div>
 
       <div class="forum-post">
         <div class="post-header">
-          <div class="post-avatar">DG</div>
-          <div><span class="post-name">Diego Gamba</span> <span class="post-company">· MercadoLibre</span></div>
-          <span class="post-time">hace 5h</span>
+          <div class="post-avatar">GM</div>
+          <div><span class="post-name">Gastón Milano</span> <span class="post-company">· AI Engineer</span></div>
+          <span class="post-time">noche anterior</span>
         </div>
-        <div class="post-body">En MercadoLibre estamos usando modelos de lenguaje para mejorar las búsquedas. El impacto en conversión es notable.</div>
+        <div class="post-body">Estimados, les dejo la agenda que con el mail que mandó FK me generó 'Tonga' mi agente, le pedí que generara una imagen para cada uno y una descripción y video. Nos vemos mañana:</div>
+        <a href="https://gmilano.github.io/miniforo-ia/" class="post-url" target="_blank">🔗 gmilano.github.io/miniforo-ia/</a>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">DL</div>
+          <div><span class="post-name">Diego Lev</span> <span class="post-company">· Notable Publicidad</span></div>
+          <span class="post-time">post-evento</span>
+        </div>
+        <div class="post-body">Maravilloso encuentro! Muchas gracias a los anfitriones por su generosidad y cada uno de ustedes por hacerlo tan inspirador.</div>
       </div>
 
       <div class="forum-post">
         <div class="post-header">
           <div class="post-avatar">MB</div>
           <div><span class="post-name">Matias Boix</span> <span class="post-company">· Auth0 / Okta</span></div>
-          <span class="post-time">hace 1d</span>
+          <span class="post-time">post-evento</span>
         </div>
-        <div class="post-body">Identity + AI es una combinación que va a cambiar todo. Estamos experimentando con detección de fraude basada en patrones de comportamiento.</div>
+        <div class="post-body">Gracias a todos, en especial a los organizadores! Espectacular la dinámica y fue un placer aprender de todos ustedes.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">OD</div>
+          <div><span class="post-name">Orlando Dovat</span> <span class="post-company">· Zonamerica</span></div>
+          <span class="post-time">post-evento</span>
+        </div>
+        <div class="post-body">Muchas gracias a Fabián y Sebastián por la iniciativa y la generosidad de juntar a todos para compartir un enorme conocimiento y experiencia sobre IA. Un día muy importante para todos nosotros.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">EO</div>
+          <div><span class="post-name">Esteban Ordano</span> <span class="post-company">· Decentraland</span></div>
+          <span class="post-time">post-evento</span>
+        </div>
+        <div class="post-body">Hermosa jornada. Muchas gracias por organizar esto y la invitación! A las órdenes para ayudar en lo que pueda (si los agentes no alcanzan! jaja)</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">AL</div>
+          <div><span class="post-name">Ariel Lipschutz</span> <span class="post-company">· IA2 Agency</span></div>
+          <span class="post-time">herramientas</span>
+        </div>
+        <div class="post-body">Sugiero investiguen el concepto de 'vibecodear' que es algo así como promptear un sistema y que la IA desarrolle un sistema, un sitio web, una app mobile.</div>
+        <a href="https://bolt.new" class="post-url" target="_blank">🔗 bolt.new</a>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">GM</div>
+          <div><span class="post-name">Gastón Milano</span> <span class="post-company">· AI Engineer</span></div>
+          <span class="post-time">herramientas</span>
+        </div>
+        <div class="post-body">Para asistentes personales OpenClaw. Para asistentes de código Claude Code / Codex / Gemini CLI. Y enterprise: los invitamos a conocer Globant Enterprise AI.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">FK</div>
+          <div><span class="post-name">Fabián Kopel</span> <span class="post-company">· Organizador</span></div>
+          <span class="post-time">seguimiento</span>
+        </div>
+        <div class="post-body">Sería bueno si cada uno de los expertos que habló nos deja deberes para probar o nos resume las plataformas que deberíamos probar. Así aprovechamos a verlas.</div>
+      </div>
+
+      <div class="forum-post">
+        <div class="post-header">
+          <div class="post-avatar">NJ</div>
+          <div><span class="post-name">Nicolas Jodal</span> <span class="post-company">· GeneXus / Globant</span></div>
+          <span class="post-time">humor</span>
+        </div>
+        <div class="post-body">Dice Guibert que las horas por el desarrollo de los sistemas te las da gratis, pero que gastamos 2 millones de tokens, me pide la razón social para pasarte la factura 😄</div>
       </div>
     </div>
   </div>
@@ -494,52 +595,66 @@
 
 <!-- TOOLBOX -->
 <section id="toolbox">
-  <div class="section-label">RECURSOS</div>
-  <h2>ToolBox</h2>
-  <p class="subtitle">Herramientas de IA compartidas por los participantes del foro. Descripciones generadas automáticamente.</p>
+  <div class="section-label" data-en="RESOURCES" data-es="RECURSOS">RECURSOS</div>
+  <h2 data-en="ToolBox" data-es="ToolBox">ToolBox</h2>
+  <p class="subtitle" data-en="AI tools and resources shared by forum participants." data-es="Herramientas de IA compartidas por los participantes del foro.">Herramientas de IA compartidas por los participantes del foro.</p>
 
   <div class="toolbox-grid">
     <div class="tool-card">
-      <div class="tool-icon">🤖</div>
-      <h4>Claude by Anthropic</h4>
-      <p>Asistente de IA avanzado para análisis, escritura y programación. Usado por múltiples participantes del foro.</p>
-      <a href="https://claude.ai" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
-      <div class="tool-shared">Compartido por Nicolas Jodal</div>
-    </div>
-    <div class="tool-card">
       <div class="tool-icon">⚡</div>
-      <h4>n8n Automation</h4>
-      <p>Plataforma de automatización con IA para workflows empresariales. Integra con múltiples servicios y APIs.</p>
-      <a href="https://n8n.io" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
-      <div class="tool-shared">Compartido por Matias Boix</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">📊</div>
-      <h4>Cursor IDE</h4>
-      <p>Editor de código con inteligencia artificial integrada. Acelera el desarrollo con sugerencias contextuales.</p>
-      <a href="https://cursor.sh" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
-      <div class="tool-shared">Compartido por Gastón Milano</div>
+      <h4>bolt.new</h4>
+      <p>Plataforma de vibe coding para crear sitios web y aplicaciones con IA. Probada por Ariel Lipschutz para crear sistemas completos.</p>
+      <a href="https://bolt.new" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Ariel Lipschutz</div>
     </div>
     <div class="tool-card">
       <div class="tool-icon">🎨</div>
-      <h4>Midjourney</h4>
-      <p>Generación de imágenes con IA. Ideal para crear contenido visual de alta calidad para presentaciones y marketing.</p>
-      <a href="https://midjourney.com" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
-      <div class="tool-shared">Compartido por Leo Alvarez</div>
+      <h4>Lovable</h4>
+      <p>Herramienta líder de vibe coding para crear aplicaciones web. Interfaces más pulidas y user-friendly.</p>
+      <a href="https://lovable.dev" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Gastón Milano y Martin Dovat</div>
     </div>
     <div class="tool-card">
-      <div class="tool-icon">🧠</div>
-      <h4>NotebookLM</h4>
-      <p>Herramienta de Google para análisis de documentos con IA. Permite hacer preguntas sobre tus propios datos.</p>
-      <a href="https://notebooklm.google.com" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
-      <div class="tool-shared">Compartido por Diego Gamba</div>
+      <div class="tool-icon">💻</div>
+      <h4>Claude Code</h4>
+      <p>Asistente de código por terminal de Anthropic para equipos y personas. Uno de los líderes en coding assistants.</p>
+      <a href="https://claude.ai" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Gastón Milano</div>
     </div>
     <div class="tool-card">
-      <div class="tool-icon">🔐</div>
-      <h4>Auth0 AI</h4>
-      <p>Autenticación inteligente con detección de fraude basada en patrones de comportamiento y machine learning.</p>
-      <a href="https://auth0.com" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
-      <div class="tool-shared">Compartido por Matias Boix</div>
+      <div class="tool-icon">🤖</div>
+      <h4>OpenClaw</h4>
+      <p>Máquina personal de IA. Muy recomendado con precaución en seguridad, especialmente para no coders.</p>
+      <a href="https://openclaw.ai" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Nik Bergman</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📱</div>
+      <h4>Rork</h4>
+      <p>Plataforma para crear apps mobile con IA. Ideal para prototipos rápidos.</p>
+      <a href="https://rork.com" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Ariel Lipschutz</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📋</div>
+      <h4>Manus AI</h4>
+      <p>Agente de IA para tareas complejas como revisión de documentos legales y análisis.</p>
+      <a href="https://manus.im" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Sergio Fogel</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔗</div>
+      <h4>Paperclip</h4>
+      <p>Herramienta para generar agentes que interactúen entre sí. Red de agentes para contenido automatizado.</p>
+      <a href="https://paperclip.ing" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Ariel Lipschutz</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🏢</div>
+      <h4>Globant Enterprise AI</h4>
+      <p>Plataforma enterprise cross-model, cross-agent, cross-cloud con data science.</p>
+      <a href="https://www.globant.com/services/ai" class="tool-link" target="_blank">🔗 Visitar herramienta →</a>
+      <div class="tool-shared">Compartido por Gastón Milano</div>
     </div>
   </div>
 </section>
@@ -549,11 +664,11 @@
 <!-- QUOTE -->
 <section>
   <div class="quote-block">
-    <div class="quote-text">"Los esperamos mañana con ganas de aprender y siempre agradecidos a ustedes que estén en Uruguay, que es increíble que reúna este talento."</div>
-    <div class="quote-author">— Fabián Kopel, organizador</div>
+    <div class="quote-text" data-en=""Business leaders gather to explore how AI is transforming industries."" data-es=""Los esperamos mañana con ganas de aprender y siempre agradecidos a ustedes que estén en Uruguay, que es increíble que reúna este talento."">Los esperamos mañana con ganas de aprender y siempre agradecidos a ustedes que estén en Uruguay, que es increíble que reúna este talento.</div>
+    <div class="quote-author" data-en="— Fabián Kopel, organizer" data-es="— Fabián Kopel, organizador">— Fabián Kopel, organizador</div>
     <div class="quote-special">
       <div class="star">⭐</div>
-      <p><strong>Diego Forlán</strong> — Mejor jugador del Mundial 2010 · Fundador DFC Club Deportivo. Presente como <strong style="color:#f59e0b;">talento uruguayo por excelencia</strong> y empresario.</p>
+      <p data-en="&lt;strong&gt;Diego Forlán&lt;/strong&gt; — Best player of World Cup 2010 · Founder DFC Sports Club. Present as &lt;strong style="color:#f59e0b;"&gt;quintessential Uruguayan talent&lt;/strong&gt; and entrepreneur." data-es="&lt;strong&gt;Diego Forlán&lt;/strong&gt; — Mejor jugador del Mundial 2010 · Fundador DFC Club Deportivo. Presente como &lt;strong style="color:#f59e0b;"&gt;talento uruguayo por excelencia&lt;/strong&gt; y empresario."><strong>Diego Forlán</strong> — Mejor jugador del Mundial 2010 · Fundador DFC Club Deportivo. Presente como <strong style="color:#f59e0b;">talento uruguayo por excelencia</strong> y empresario.</p>
     </div>
   </div>
 </section>
@@ -563,34 +678,63 @@
 <!-- FAQ -->
 <section id="faq">
   <div class="section-label">FAQ</div>
-  <h2>Frequently Asked Questions</h2>
+  <h2 data-en="Frequently Asked Questions" data-es="Preguntas Frecuentes">Preguntas Frecuentes</h2>
 
   <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">What is the Mini AI Forum? <span class="arrow">▼</span></div>
-    <div class="faq-a">An intimate gathering of tech experts and business leaders in Montevideo, Uruguay, organized by Fabián Kopel to explore how AI is transforming industries. Limited to ~32 participants for meaningful conversation.</div>
+    <div class="faq-q" data-en="What is the Mini AI Forum?" data-es="¿Qué es el Mini Foro de IA?"><span class="arrow">▼</span> <span style="flex:1; text-align:left;">¿Qué es el Mini Foro de IA?</span></div>
+    <div class="faq-a" data-en="An intimate gathering of tech experts and business leaders in Montevideo, Uruguay, organized by Fabián Kopel to explore how AI is transforming industries. Limited to ~32 participants for meaningful conversation." data-es="Una reunión íntima de expertos en tecnología y líderes empresariales en Montevideo, Uruguay, organizada por Fabián Kopel para explorar cómo la IA está transformando las industrias. Limitada a ~32 participantes para una conversación significativa.">Una reunión íntima de expertos en tecnología y líderes empresariales en Montevideo, Uruguay, organizada por Fabián Kopel para explorar cómo la IA está transformando las industrias. Limitada a ~32 participantes para una conversación significativa.</div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Who can attend? <span class="arrow">▼</span></div>
-    <div class="faq-a">The forum is by invitation only. It brings together CEOs, founders, and AI specialists from Uruguay and the region to foster direct, high-quality exchanges.</div>
+    <div class="faq-q" data-en="Who can attend?" data-es="¿Quién puede asistir?"><span class="arrow">▼</span> <span style="flex:1; text-align:left;">¿Quién puede asistir?</span></div>
+    <div class="faq-a" data-en="The forum is by invitation only. It brings together CEOs, founders, and AI specialists from Uruguay and the region to foster direct, high-quality exchanges." data-es="El foro es por invitación únicamente. Reúne a CEOs, fundadores y especialistas en IA de Uruguay y la región para fomentar intercambios directos y de alta calidad.">El foro es por invitación únicamente. Reúne a CEOs, fundadores y especialistas en IA de Uruguay y la región para fomentar intercambios directos y de alta calidad.</div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">How can I contact Fabián? <span class="arrow">▼</span></div>
-    <div class="faq-a">You can reach Fabián Kopel through LinkedIn or via the contact form on the Kopel Sánchez website. He is always open to connecting with people passionate about AI and technology.</div>
+    <div class="faq-q" data-en="How can I contact Fabián?" data-es="¿Cómo puedo contactar a Fabián?"><span class="arrow">▼</span> <span style="flex:1; text-align:left;">¿Cómo puedo contactar a Fabián?</span></div>
+    <div class="faq-a" data-en="You can reach Fabián Kopel through LinkedIn or via the contact form on the Kopel Sánchez website. He is always open to connecting with people passionate about AI and technology." data-es="Puedes contactar a Fabián Kopel a través de LinkedIn o mediante el formulario de contacto en el sitio web de Kopel Sánchez. Siempre está abierto a conectar con personas apasionadas por IA y tecnología.">Puedes contactar a Fabián Kopel a través de LinkedIn o mediante el formulario de contacto en el sitio web de Kopel Sánchez. Siempre está abierto a conectar con personas apasionadas por IA y tecnología.</div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">What is the ToolBox? <span class="arrow">▼</span></div>
-    <div class="faq-a">A curated collection of AI tools and resources shared by forum participants. When someone shares a URL in the Foro section, it is automatically added to the ToolBox with an AI-generated description.</div>
+    <div class="faq-q" data-en="What is the ToolBox?" data-es="¿Qué es el ToolBox?"><span class="arrow">▼</span> <span style="flex:1; text-align:left;">¿Qué es el ToolBox?</span></div>
+    <div class="faq-a" data-en="A curated collection of AI tools and resources shared by forum participants. When someone shares a URL in the Foro section, it is automatically added to the ToolBox." data-es="Una colección curada de herramientas de IA y recursos compartidos por participantes del foro. Cuando alguien comparte una URL en la sección Foro, se agrega automáticamente a ToolBox.">Una colección curada de herramientas de IA y recursos compartidos por participantes del foro. Cuando alguien comparte una URL en la sección Foro, se agrega automáticamente a ToolBox.</div>
   </div>
 </section>
+
+<!-- VIDEO MODAL -->
+<div class="modal-overlay" id="videoModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeVideoModal()">✕</button>
+    <iframe id="modalVideo" class="modal-video" allow="autoplay"></iframe>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-role" id="modalRole"></div>
+    <div class="modal-bio" id="modalBio"></div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
   <strong>Mini Foro <span>IA</span></strong><br>
-  Organized by Fabián Kopel · Montevideo, Uruguay<br>
+  <span data-en="Organized by Fabián Kopel · Montevideo, Uruguay" data-es="Organizado por Fabián Kopel · Montevideo, Uruguay">Organizado por Fabián Kopel · Montevideo, Uruguay</span><br>
   <span style="font-size:0.7rem;">Imágenes: DALL-E 3 · Videos: Sora 2</span>
 </footer>
 
 <script>
+// TRANSLATION SYSTEM
+let currentLang = 'es';
+
+function toggleLang() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  document.querySelector('.lang-btn').textContent = currentLang.toUpperCase();
+
+  // Update all translatable elements
+  document.querySelectorAll('[data-es][data-en]').forEach(el => {
+    const text = el.getAttribute(`data-${currentLang}`);
+    if (text && !text.includes('<')) {
+      el.textContent = text;
+    } else if (text && text.includes('<br>')) {
+      el.innerHTML = text;
+    }
+  });
+}
+
 // CAROUSEL
 function scrollCarousel(dir) {
   const track = document.getElementById('carouselTrack');
@@ -626,6 +770,60 @@ function toggleFaq(el) {
   answer.classList.toggle('open');
   arrow.classList.toggle('open');
 }
+
+// VIDEO MODAL
+const speakerData = {
+  'Andrés Bzurovski': { video: '1HqNogE9Z49esqOovnnCmKaPPYD55vZy0', role: 'CEO · Vixion / Bankingly', desc: 'Building the infrastructure of digital banking in LatAm.' },
+  'Ariel Lipchutz': { video: '1JGe3Wm7yCmmfz-INdTN2Qryp6vsnO3f6', role: 'Founder · IA2 Agency', desc: 'Turning the promise of AI into real results for companies.' },
+  'Martin Dovat': { video: '1sbs4qfoEgdCQ0FhQPLIaoRJVNHqusHJr', role: 'Director · Zonamerica', desc: 'Leading innovation in Uruguay\'s technology ecosystem.' },
+  'Nicolas Jodal': { video: '1F70iq5Zeu2Mp0zhMWW4Wqtujnuf56nhm', role: 'CEO GeneXus / Globant', desc: 'Since 1988 reimagining how software is built — now with AI.' },
+  'Sebastián Sánchez': { video: '1HpynHYpHrpEa6lGNXxfkTLjeiVQoSKnF', role: 'CEO · KS-NX', desc: 'Visionary leader in AI transformation.' },
+  'Fabián Kopel': { video: null, role: 'Organizador', desc: 'Bringing together Uruguay\'s tech and business leaders.' },
+  'Gastón Milano': { video: '1Me_5OQd7hqTMIewpi65w8_5IkodSxew-', role: 'AI Engineer', desc: 'From code to intelligence — building AI-native applications.' }
+};
+
+function openVideoModal(speakerName) {
+  const data = speakerData[speakerName];
+  if (!data) return;
+
+  const modal = document.getElementById('videoModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalRole = document.getElementById('modalRole');
+  const modalBio = document.getElementById('modalBio');
+  const modalVideo = document.getElementById('modalVideo');
+
+  modalTitle.textContent = speakerName;
+  modalRole.textContent = data.role;
+  modalBio.textContent = data.desc;
+
+  if (data.video) {
+    modalVideo.src = `https://drive.google.com/file/d/${data.video}/preview`;
+    modalVideo.style.display = 'block';
+  } else {
+    modalVideo.style.display = 'none';
+  }
+
+  modal.classList.add('active');
+}
+
+function closeVideoModal() {
+  document.getElementById('videoModal').classList.remove('active');
+  document.getElementById('modalVideo').src = '';
+}
+
+document.getElementById('videoModal').addEventListener('click', (e) => {
+  if (e.target.id === 'videoModal') {
+    closeVideoModal();
+  }
+});
+
+// Add click listeners to agenda items with videos
+document.querySelectorAll('.agenda-item[data-video]').forEach(item => {
+  item.addEventListener('click', () => {
+    const speakerName = item.querySelector('.ag-name').textContent;
+    openVideoModal(speakerName);
+  });
+});
 
 // FORUM POST
 function addPost() {
@@ -664,13 +862,6 @@ document.querySelectorAll('.nav-links a').forEach(a => {
     }
   });
 });
-
-// Language toggle (demo)
-let lang = 'es';
-function toggleLang() {
-  lang = lang === 'es' ? 'en' : 'es';
-  document.querySelector('.lang-btn').textContent = lang.toUpperCase();
-}
 </script>
 
 </body>
