@@ -25,8 +25,8 @@ https://github.com/farolita/miniforo-ia/blob/main/index.html
         .nav-links { display: flex; gap: 20px; flex: 1; justify-content: center; }
         .nav-links a { color: #aaa; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
         .nav-links a:hover { color: #fff; }
-        .nav-links a.new-tag { position: relative; }
-        .nav-links a.new-tag::after { content: "NEW"; position: absolute; top: -8px; right: -24px; background: #2196F3; color: #fff; font-size: 0.5rem; padding: 1px 4px; border-radius: 3px; font-weight: 700; }
+        .nav-links a.new-tag { position: relative; padding-right: 28px; }
+        .nav-links a.new-tag::after { content: "NEW"; position: absolute; top: -8px; right: 0; background: #2196F3; color: #fff; font-size: 0.5rem; padding: 1px 4px; border-radius: 3px; font-weight: 700; }
         .lang-btn { background: #1a2040; border: 1px solid #2a3060; color: #aaa; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: background 0.2s; }
         .lang-btn:hover { background: #2a3060; color: #fff; }
 
@@ -250,8 +250,8 @@ https://github.com/farolita/miniforo-ia/blob/main/index.html
             <a href="#agenda" data-en="Agenda" data-es="Agenda">Agenda</a>
             <a href="#photos" data-en="Photos" data-es="Fotos">Fotos</a>
             <a href="#companies" data-en="Companies" data-es="Empresas">Empresas</a>
-            <a href="#foro" class="new-tag" style="margin-right: 20px;" data-en="Forum" data-es="Foro">Foro</a>
-            <a href="#toolbox" class="new-tag" style="margin-right: 20px;" data-en="ToolBox" data-es="ToolBox">ToolBox</a>
+            <a href="#foro" class="new-tag" data-en="Forum" data-es="Foro">Foro</a>
+            <a href="#toolbox" class="new-tag" data-en="ToolBox" data-es="ToolBox">ToolBox</a>
             <a href="#faq" data-en="FAQ" data-es="FAQ">FAQ</a>
         </div>
         <button class="lang-btn" onclick="toggleLang()">EN</button>
