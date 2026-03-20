@@ -27,7 +27,7 @@ https://github.com/farolita/miniforo-ia/blob/main/index.html
         .nav-links a:hover { color: #fff; }
         .nav-links a.new-tag { position: relative; padding-right: 28px; }
         .nav-links a.new-tag::after { content: "NEW"; position: absolute; top: -8px; right: 0; background: #2196F3; color: #fff; font-size: 0.5rem; padding: 1px 4px; border-radius: 3px; font-weight: 700; }
-        .lang-btn { background: #1a2040; border: 1px solid #2a3060; color: #aaa; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: background 0.2s; }
+        .lang-btn { background: #1a2040; border: 1px solid #2a3060; color: #aaa; padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
         .lang-btn:hover { background: #2a3060; color: #fff; }
 
         /* HERO */
@@ -254,7 +254,7 @@ https://github.com/farolita/miniforo-ia/blob/main/index.html
             <a href="#toolbox" class="new-tag" data-en="ToolBox" data-es="ToolBox">ToolBox</a>
             <a href="#faq" data-en="FAQ" data-es="FAQ">FAQ</a>
         </div>
-        <button class="lang-btn" onclick="toggleLang()">EN</button>
+        <button class="lang-btn" onclick="toggleLang()"><span id="lang-flag">🇺🇾</span> ES</button>
     </nav>
 
     <!-- HERO -->
@@ -859,16 +859,17 @@ https://github.com/farolita/miniforo-ia/blob/main/index.html
     <script>
         // TRANSLATION SYSTEM
         let currentLang = 'es';
-        function toggleLang() {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            document.querySelector('.lang-btn').textContent = currentLang === 'es' ? 'EN' : 'ES';
-            document.querySelectorAll('[data-es][data-en]').forEach(el => {
-                const text = el.getAttribute(`data-${currentLang}`);
-                if (text) {
-                    if (text.includes('<')) { el.innerHTML = text; } else { el.textContent = text; }
-                }
-            });
+       function toggleLang() {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    document.getElementById('lang-flag').textContent = currentLang === 'en' ? '🇺🇸' : '🇺🇾';
+    document.querySelector('.lang-btn').lastChild.textContent = currentLang === 'en' ? ' EN' : ' ES';
+    document.querySelectorAll('[data-es][data-en]').forEach(el => {
+        const text = el.getAttribute(`data-${currentLang}`);
+        if (text) {
+            if (text.includes('<')) { el.innerHTML = text; } else { el.textContent = text; }
         }
+    });
+}
 
         // CAROUSEL
         function scrollCarousel(dir) {
